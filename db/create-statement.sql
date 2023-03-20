@@ -32,7 +32,7 @@ CREATE TABLE `applications` (
   `app_date_req` VARCHAR(45) NOT NULL,
   `app_start_time` VARCHAR(45) NOT NULL,
   `app_end_time` VARCHAR(45) NOT NULL,
-  `app_desc` VARCHAR(200) NULL,
+  `app_description` VARCHAR(200) NULL,
   `app_estim_people` INT NOT NULL,
   PRIMARY KEY (`app_id`),
   UNIQUE KEY `app_id_UNIQUE` (`app_id`)

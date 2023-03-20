@@ -19,7 +19,7 @@
 
 include('library.php');
 
-extract($_REQUEST);
+//extract($_REQUEST);
 
 $conn = get_database_connection();
 
@@ -28,7 +28,7 @@ $contactEmail = $conn->real_escape_string($contactEmail);
 
 // Build the INSERT statement
 $sql = <<<SQL
-INSERT INTO tickets (tkt_problem, tkt_priority, tkt_contact_email)
+INSERT INTO tickets (cus_first_name, cus_last_name, tier, afl_id, date_req, start_time, end_time, description)
        VALUES ('{$problem}', $priority, '{$contactEmail}')
 SQL;
 
