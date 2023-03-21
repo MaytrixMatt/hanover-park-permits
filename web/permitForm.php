@@ -15,19 +15,34 @@
             <input type="text" name="last_name" /><br/>
 
             Tier:<br/>
-            <input type="text" name="tier" /><br/>
+            <select name="tier">
+            <option value=0>1</option>
+            <option value=1>2</option>
+            <option value=2>3</option>
+            <option value=3>4</option>
+            <option value=4>5</option>
+            <option value=5>6</option>
+            <option value=6>7</option>
+            <option value=7>8</option>
+            <option value=8>9</option>
+            </select><br />
 
             Field Requested:<br/>
-            <input type="text" name="field_requested" /><br/>
+            <select name="field_requested">
+            <option value="volvo">Soccer #1</option>
+            <option value="saab">Baseball #6</option>
+            <option value="mercedes">Tennis</option>
+            <option value="audi">Pavilion</option>
+            </select><br />
 
             Date Requested:<br/>
-            <input type="text" name="date_requested" /><br/>
+            <input type="date" name="date_requested" /><br/>
 
             Start Time:<br/>
-            <input type="text" name="start_time" /><br/>
+            <input type="time" name="start_time" /><br/>
 
             End Time:<br/>
-            <input type="text" name="end_time" /><br/>
+            <input type="time" name="end_time" /><br/>
 
             Description of Activity:<br/>
             <input type="text" name="description" /><br/>
