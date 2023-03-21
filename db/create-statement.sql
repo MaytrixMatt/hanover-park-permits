@@ -33,7 +33,7 @@ CREATE TABLE `applications` (
   `app_start_time` VARCHAR(45) NOT NULL,
   `app_end_time` VARCHAR(45) NOT NULL,
   `app_description` VARCHAR(200) NULL,
-  `app_estim_people` INT NOT NULL,
+  `app_estimated_people` INT NOT NULL,
   PRIMARY KEY (`app_id`),
   UNIQUE KEY `app_id_UNIQUE` (`app_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

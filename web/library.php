@@ -1,16 +1,7 @@
 <?php
 
-/*************************************************************************************************
- * library.php
- *
- * Common environment settings and functions used througout the Ticket Tracker application.
- *************************************************************************************************/
-
 extract($_REQUEST);
 
-/*
- * Returns the content to be included based on the 'content' request parameter, if present.
- */
 function get_content()
 {
     global $content;
@@ -25,9 +16,6 @@ function get_content()
     return $content;
 }
 
-/*
- * Returns a connection to the underlying MySQL database.
- */
 function get_database_connection()
 {
     $servername = "localhost";
