@@ -12,13 +12,13 @@ include('library.php');
     <body>
         <h1>Thank you for submitting your permit request.</h1>
 
-
         <?php
 
         extract($_REQUEST);
 
         $conn = get_database_connection();
 
+<<<<<<< HEAD
         $first_name = $conn->real_escape_string($first_name);
         $last_name = $conn->real_escape_string($last_name);
         $tier = $conn->real_escape_string($tier);
@@ -30,6 +30,10 @@ include('library.php');
 
         $sql = "INSERT INTO applications(app_cus_first_name, app_cus_last_name, app_tier, app_afl_id, app_date_req, app_start_time, app_end_time, app_desc, app_estim_people)" . 
                 "VALUES('$first_name', '$last_name', '$tier', '$afl_id', '$date_requested', '$start_time', '$end_time', '$description', '$estimated_people')";
+=======
+        $sql = "INSERT INTO applications(app_cus_first_name, app_cus_last_name, app_tier, app_date_req, app_start_time, app_end_time, app_desc, app_estim_people)" . 
+                "VALUES('$first_name', '$last_name', '$tier', '$date_requested', '$start_time', '$end_time', '$description', '$estimated_people')";
+>>>>>>> d8d6b3dcbe9e5b9732bb8e2614facfa05687635f
                 
         $conn->query($sql);
 

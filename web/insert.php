@@ -19,23 +19,17 @@
 
 include('library.php');
 
-extract($_REQUEST);
 
 $conn = get_database_connection();
 
-$problem = $conn->real_escape_string($problem);
-$contactEmail = $conn->real_escape_string($contactEmail);
-
-// Build the INSERT statement
 $sql = <<<SQL
-INSERT INTO tickets (tkt_problem, tkt_priority, tkt_contact_email)
-       VALUES ('{$problem}', $priority, '{$contactEmail}')
+INSERT INTO tickets (cus_first_name, cus_last_name, tier, afl_id, date_req, start_time, end_time, description)
+VALUES('$first_name', '$last_name', '$tier', '$date_requested', '$start_time', '$end_time', '$description');
 SQL;
 
-// Execute the query and redirect to the list
 if ($conn->query($sql) == TRUE)
 {
-    header('Location: index.php?content=list');
+    header('Location: index.php?content=');
 }
 else
 {
