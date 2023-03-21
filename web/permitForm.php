@@ -21,7 +21,7 @@
             <input type="text" name="field_requested" /><br/>
 
             Date Requested:<br/>
-            <input type="text" name="date_requested" /><br/>
+            <input type="date" name="date_requested" /><br/>
 
             Start Time:<br/>
             <input type="text" name="start_time" /><br/>
