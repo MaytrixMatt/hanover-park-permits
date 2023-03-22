@@ -56,5 +56,3 @@ else
 {
     echo "Error inserting record: " . $conn->error;
 }
-
-$conn->close();
