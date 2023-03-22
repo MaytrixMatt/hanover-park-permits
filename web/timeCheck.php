@@ -37,7 +37,19 @@
                 echo "<td>" . $row['fld_loc_id'] . "</td>";
                 echo "<td>" . $row['fld_reserved'] . "</td>";
             }
+            
         ?>
+        <div class="mb-3">
+        <label for="priority" class="form-label">Facility</label>
+        <select class="form-select" name="priority">
+            <option value="1">Briggs Field</option>
+            <option value="2">Ceurvels Field</option>
+            <option value="3">Calvin J. Ellis Field</option>
+            <option value="4">Forge Pond Park</option>
+            <option value="5">Amos Gallant Field</option>
+            <option value="6">B. Everett Hall</option>
+        </select>
+    </div>
     </tbody>
     </table>
 </body>
