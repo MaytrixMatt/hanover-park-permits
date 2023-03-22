@@ -14,10 +14,8 @@
     <table class="table">
     <thead>
         <tr>
-            <th>Field ID</th>
             <th>Field Name</th>
-            <th>Field Location ID</th>
-            <th id ="status">Field Reservation Status</th>
+            <th>Field Reservation Status</th>
         </tr>
     </thead>
     <tbody>
@@ -41,9 +39,7 @@
             while ($row = $result->fetch_assoc())
             {
                 echo "<tr>";
-                echo "<td>" . $row['fld_id'] . "</td>";
                 echo "<td>" . $row['fld_name'] . "</td>";
-                echo "<td>" . $row['fld_loc_id'] . "</td>";
                 echo "<td>" . $row['fld_reserved'] . "</td>";
             }
             
@@ -51,12 +47,12 @@
         <div class="mb-3">
         <label for="Facility" class="form-label">Facility</label>
         <select class="form-select" id="facility" onchange="updateFields()">
-            <option value="1">Briggs Field</option>
-            <option value="2">Ceurvels Field</option>
-            <option value="3">Calvin J. Ellis Field</option>
-            <option value="4">Forge Pond Park</option>
-            <option value="5">Amos Gallant Field</option>
-            <option value="6">B. Everett Hall</option>
+            <option value="1"<?php if($id==1)echo "Selected"; ?>>Briggs Field</option>
+            <option value="2" <?php if($id==2)echo "Selected"; ?> >Ceurvels Field</option>
+            <option value="3"<?php if($id==3)echo "Selected"; ?>>Calvin J. Ellis Field</option>
+            <option value="4"<?php if($id==4)echo "Selected"; ?>>Forge Pond Park</option>
+            <option value="5"<?php if($id==5)echo "Selected"; ?>>Amos Gallant Field</option>
+            <option value="6"<?php if($id==6)echo "Selected"; ?>>B. Everett Hall</option>
         </select>
         </div>
         <br>
