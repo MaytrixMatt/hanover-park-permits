@@ -16,23 +16,32 @@
 
             Tier:<br/>
             <select name="tier">
-            <option value=0>1</option>
-            <option value=1>2</option>
-            <option value=2>3</option>
-            <option value=3>4</option>
-            <option value=4>5</option>
-            <option value=5>6</option>
-            <option value=6>7</option>
-            <option value=7>8</option>
-            <option value=8>9</option>
+            <option value="t0">1</option>
+            <option value="t1">2</option>
+            <option value="t2">3</option>
+            <option value="t3">4</option>
+            <option value="t4">5</option>
+            <option value="t5">6</option>
+            <option value="t6">7</option>
+            <option value="t7">8</option>
+            <option value="t8">9</option>
             </select><br />
 
-            Field Requested:<br/>
+            Facility:<br />
+            <select name="facility">
+            <option value="f1">Briggs Field</option>
+            <option value="f2">Ceurvels Field</option>
+            <option value="f3">Calvin J. Ellis Field</option>
+            <option value="f4">Forge Pond Park</option>
+            <option value="f5">Amos Gallant Field</option>
+            <option value="f6">B. Everett Hall</option>
+
+            Field Requested:<br />
             <select name="field_requested">
-            <option value="volvo">Soccer #1</option>
-            <option value="saab">Baseball #6</option>
-            <option value="mercedes">Tennis</option>
-            <option value="audi">Pavilion</option>
+            <option value="f1">Soccer #1</option>
+            <option value="f2">Baseball #6</option>
+            <option value="f3">Tennis</option>
+            <option value="f4">Pavilion</option>
             </select><br />
 
             Date Requested:<br/>
