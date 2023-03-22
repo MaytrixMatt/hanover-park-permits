@@ -62,7 +62,7 @@
         <br>
         <div id = "timeList">
             <label for="priority" class="time-form-label">Time</label>
-            <select id="time" name="priority">
+            <select id="time" name="priority" onchange="updateFields()">
                 <option value="0">12:00 AM</option>
                 <option value="1">1:00 AM</option>
                 <option value="2">2:00 AM</option>
@@ -91,7 +91,7 @@
         </div>
         <div id = "fieldList">
             <label for="priority" class="field-form-label">Time</label>
-            <select id="field" name="priority">
+            <select id="field" name="priority" onchange="updateFields()">
                 <option value="1">T-Ball</option>
                 <option value="2">Full-size Baseball</option>
                 <option value="3">Little League</option>
