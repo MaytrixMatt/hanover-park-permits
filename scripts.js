@@ -2,5 +2,11 @@
 // This should modify html code ***
 function displayFields() {
     // 1.) check the option that was chosen
-    
+    var facilityID = "#facility";
+    var facility = $(facilityID).val();
+
+    // 2.) check the facility and decide what fields to display
+    if (facility == ) {
+        
+    }
 }
