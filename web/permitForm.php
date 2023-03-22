@@ -30,7 +30,7 @@
             </select><br />
 
             Facility:<br />
-            <select name="facility">
+            <select id="facility">
             <option value="f1">Briggs Field</option>
             <option value="f2">Ceurvels Field</option>
             <option value="f3">Calvin J. Ellis Field</option>
@@ -39,11 +39,7 @@
             <option value="f6">B. Everett Hall</option>
 
             Field Requested:<br />
-            <select name="field_requested">
-            <option value="f1">Soccer #1</option>
-            <option value="f2">Baseball #6</option>
-            <option value="f3">Tennis</option>
-            <option value="f4">Pavilion</option>
+            <select id="field_requested">
             </select><br />
 
             Date Requested:<br/>
