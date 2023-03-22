@@ -26,6 +26,21 @@ $conn = get_database_connection();
 $problem = $conn->real_escape_string($problem);
 $contactEmail = $conn->real_escape_string($contactEmail);
 
+
+// doing the conversion from name to foreign key
+//1.) write sql select statement to get the name the row of field with name and id
+$field_name_sql = <<<SQL
+SELECT *
+  FROM fields
+ WHERE fld_name = {$field_name}
+SQL;
+
+$conn = get_database_connection();
+$result = $conn->query($field_name_sql);
+$row = $result->fetch_assoc();
+$field_id = $row['fld_id'];
+
+
 // Build the INSERT statement
 $sql = <<<SQL
 INSERT INTO tickets (tkt_problem, tkt_priority, tkt_contact_email)
