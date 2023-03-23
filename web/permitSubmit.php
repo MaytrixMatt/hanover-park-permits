@@ -43,7 +43,7 @@ include('library.php');
         
         $conn->close();
         ?>
-
+        <!-- try echoing js code after you query the database; the js code stores values stored in php variables -->
         <p><a href ="permitForm.php">Enter another ticket</a></p>
     </body>
 
