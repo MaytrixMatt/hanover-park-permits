@@ -9,11 +9,13 @@ function displayFields() {
     // 2.) check the facility and decide what fields to display
     if (facility == "f1") {
         fieldElem.append(
-            
+            $('<option></option>').val('1f1').html('T-Ball')
+            $('<option></option>').val('2f1').html('Other')
         );
     } else if (facility == "f2") {
         fieldElem.append(
-
+            $('<option></option>').val('1f2').html('T-Ball')
+            $('<option></option>').val('2f1').html('Other')
         );
     } else if (facility == "f3") {
         fieldElem.append(
@@ -43,3 +45,5 @@ function displayFields() {
 
 
 }
+
+var fieldNameGrid = $()
