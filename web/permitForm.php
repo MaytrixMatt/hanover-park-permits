@@ -18,7 +18,7 @@
         
         $conn = get_database_connection();
         $result = $conn->query($sql);
-        echo $result->fetch_assoc();
+        //echo $result->fetch_assoc();
     ?>
 
     <body> 
