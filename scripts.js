@@ -25,4 +25,4 @@ function displayFields() {
 
 }
 
-var fieldNameGrid = $()
+// var fieldNameGrid = $()

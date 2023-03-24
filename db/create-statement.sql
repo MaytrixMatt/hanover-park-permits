@@ -1,3 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS `parkpermit`;
+
+
 CREATE TABLE `fields` (
   `fld_id` int NOT NULL AUTO_INCREMENT,
   `fld_loc_id` int NOT NULL,
@@ -6,6 +9,7 @@ CREATE TABLE `fields` (
   PRIMARY KEY (`fld_id`),
   UNIQUE KEY `fld_id_UNIQUE` (`fld_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `customers` (
   `cus_id` INT NOT NULL AUTO_INCREMENT,
   `cus_first_name` VARCHAR(45) NOT NULL,
@@ -17,12 +21,14 @@ CREATE TABLE `customers` (
   `cus_tier` INT NOT NULL,
   PRIMARY KEY (`cus_id`),
   UNIQUE INDEX `cus_id_UNIQUE` (`cus_id` ASC) VISIBLE);
+  
 CREATE TABLE `location` (
   `loc_id` int NOT NULL AUTO_INCREMENT,
   `loc_name` varchar(100) NOT NULL,
   PRIMARY KEY (`loc_id`),
   UNIQUE KEY `cus_id_UNIQUE` (`loc_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `applications` (
   `app_id` int NOT NULL AUTO_INCREMENT,
   `app_cus_first_name` varchar(45) DEFAULT NULL,
