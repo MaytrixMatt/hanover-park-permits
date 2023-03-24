@@ -18,7 +18,11 @@
         
         $conn = get_database_connection();
         $result = $conn->query($sql);
+<<<<<<< HEAD
         $result->fetch_assoc();
+=======
+        //echo $result->fetch_assoc();
+>>>>>>> 59e60759dc3df8362b73fc1d555ac8e1704aba1e
     ?>
 
     <body> 

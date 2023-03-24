@@ -5,10 +5,15 @@
         if(!isset($id)){
             $id = 1;
         }
+        if(!isset($month_id)){
+            $month_id = 1;
+        }
         if(!isset($day_id)){
             $day_id = 1;
         }
-        
+        if(!isset($year_id)){
+            $year_id = 1;
+        }
     ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
@@ -27,6 +32,10 @@
     </thead>
     <tbody>
         <?php
+
+
+
+
             // problem: drop down boxes are hard coded atm
             // solution: use javascript to store the results; use jquery to modify the drop downs
             
@@ -83,6 +92,14 @@
             // 2.) then the javascript will display the available days 
             // ***REMEMBER: AT THIS POINT IN TIME, WE ARE ONLY CHECKING WHO REQUESTED THE DATE (NO HOURLY LOGIC YET)
             
+            
+            $sqlRequestedDates = <<<SQL
+                SELECT app_date_req
+                FROM applications;
+            SQL;
+            $sqlRequestedDates = $conn->query($sqlRequestedDates);
+
+
             // How can someone in the future use this code to implement the hour-logic:
             // 1.) While accessing the fields and facilities, the times that each facility is accessed may also be requested
             // 2.) With the times requested in an array, javascript can perform the logic needed to display the available
@@ -123,10 +140,17 @@
                 var id=$("#facility").val();
                 window.location.replace('timeCheck.php?id=' + id); //reloads the page; php code executes again
             }
-            function updateTimes(){
-                var id=$("#time").val();
+            function updateMonth(){
+                var month_id=$("#year").val();
                 window.location.replace('timeCheck.php?id=' + id);
-
+            }
+            function updateDays(){
+                var day_id=$("#day").val();
+                window.location.replace('timeCheck.php?id=' + id);
+            }
+            function updateYear(){
+                var year_id=$("#year").val();
+                window.location.replace('timeCheck.php?id=' + id);
             }
         </script>
         
@@ -139,25 +163,23 @@
         <br>
         <div id = "monthList">
             <label for="monthlist" class="field-form-label">Month</label>
-            <select id="monthlist" name="monthlist" onchange="">
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
+            <select id="monthlist" name="monthlist" onchange="updateMonth()">
+                <option value="1"<?php if($month_id==1)echo "Selected"; ?>>January</option>
+                <option value="2"<?php if($month_id==2)echo "Selected"; ?>>February</option>
+                <option value="3"<?php if($month_id==3)echo "Selected"; ?>>March</option>
+                <option value="4"<?php if($month_id==4)echo "Selected"; ?>>April</option>
+                <option value="5"<?php if($month_id==5)echo "Selected"; ?>>May</option>
+                <option value="6"<?php if($month_id==6)echo "Selected"; ?>>June</option>
+                <option value="7"<?php if($month_id==7)echo "Selected"; ?>>July</option>
+                <option value="8"<?php if($month_id==8)echo "Selected"; ?>>August</option>
+                <option value="9"<?php if($month_id==9)echo "Selected"; ?>>September</option>
+                <option value="10"<?php if($month_id==10)echo "Selected"; ?>>October</option>
+                <option value="11"<?php if($month_id==11)echo "Selected"; ?>>November</option>
+                <option value="12"<?php if($month_id==12)echo "Selected"; ?>>December</option>
             </select>
-        </div>
-
-        <div id = "timeList">
+        
             <label for="priority" class="day-form-label">Day</label>
-            <select id="day" name="priority" onchange="updateTimes()">
+            <select id="day" name="priority" onchange = "updateDays()">
                 <option value="1"<?php if($day_id==1)echo "Selected"; ?>>1</option>
                 <option value="2"<?php if($day_id==2)echo "Selected"; ?>>2</option>
                 <option value="3"<?php if($day_id==3)echo "Selected"; ?>>3</option>
@@ -190,6 +212,10 @@
                 <option value="30"<?php if($day_id==30)echo "Selected"; ?>>30</option>
                 <option value="31"<?php if($day_id==31)echo "Selected"; ?>>31</option>
             </select>
+            <label for="yearlist" class="year-form-label">Year</label>
+            <select id="yearlist" name="yearlist" onchange="updateYear()">
+                <option value="1"<?php if($year_id==1)echo "Selected"; ?>>2023</option>
+                <option value="2"<?php if($year_id==2)echo "Selected"; ?>>2024</option>
             </select>
         </div>
        
