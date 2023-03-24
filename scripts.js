@@ -24,3 +24,5 @@ function displayFields() {
 
 
 }
+
+var fieldNameGrid = $()
