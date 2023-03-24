@@ -135,17 +135,35 @@
         </select>
         </div>
         <br>
+        <div id = "monthList">
+            <label for="monthlist" class="field-form-label">Month</label>
+            <select id="monthlist" name="monthlist" onchange="">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+
         <div id = "timeList">
             <label for="priority" class="day-form-label">Day</label>
             <select id="day" name="priority" onchange="updateTimes()">
-                <option value="1"<?php if($di==1)echo "Selected"; ?>>1</option>
-                <option value="2"<?php if($di==2)echo "Selected"; ?>>2</option>
-                <option value="3"<?php if($di==3)echo "Selected"; ?>>3</option>
-                <option value="4"<?php if($di==4)echo "Selected"; ?>>4</option>
-                <option value="5"<?php if($di==5)echo "Selected"; ?>>5</option>
-                <option value="6"<?php if($di==6)echo "Selected"; ?>>6</option>
-                <option value="7"<?php if($di==7)echo "Selected"; ?>>7</option>
-                <option value="8"<?php if($di==8)echo "Selected"; ?>>8</option>
+                <option value="1"<?php if($id==1)echo "Selected"; ?>>1</option>
+                <option value="2"<?php if($id==2)echo "Selected"; ?>>2</option>
+                <option value="3"<?php if($id==3)echo "Selected"; ?>>3</option>
+                <option value="4"<?php if($id==4)echo "Selected"; ?>>4</option>
+                <option value="5"<?php if($id==5)echo "Selected"; ?>>5</option>
+                <option value="6"<?php if($id==6)echo "Selected"; ?>>6</option>
+                <option value="7"<?php if($id==7)echo "Selected"; ?>>7</option>
+                <option value="8"<?php if($id==8)echo "Selected"; ?>>8</option>
                 <option value="9"<?php if($id==9)echo "Selected"; ?>>9</option>
                 <option value="10"<?php if($id==10)echo "Selected"; ?>>10</option>
                 <option value="11"<?php if($id==11)echo "Selected"; ?>>11</option>
@@ -172,23 +190,7 @@
             </select>
             </select>
         </div>
-        <div id = "monthList">
-            <label for="monthlist" class="field-form-label">Month</label>
-            <select id="monthlist" name="monthlist" onchange="">
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-        </div>
+       
         <div id = "fieldList">
             <label for="priority" class="field-form-label">Field</label>
             <select id="field" name="priority" onchange="">
