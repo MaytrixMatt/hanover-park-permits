@@ -1,5 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS `parkpermit`;
-// We could possibly rework this to have a DROP statement and get rid of the if clause, that way the database/schema follows the exact formula of our 'backup'.
+-- We could possibly rework this to have a DROP statement and get rid of the if clause, that way the database/schema follows the exact formula of our 'backup'.
 
 CREATE TABLE `fields` (
   `fld_id` int NOT NULL AUTO_INCREMENT,
