@@ -1,10 +1,25 @@
 <!DOCTYPE html>
+
+
 <html>
     <head> 
         <title>Field Park Permits</title>
         <script src="scripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
+
+    <?php
+        include('library.php');
+        $sql = <<<SQL
+        select fld_id, fld_loc_id, fld_name, loc_name
+          from fields
+          join location on loc_id = fld_loc_id;
+        SQL;
+        
+        $conn = get_database_connection();
+        $result = $conn->query($sql);
+        echo $result->fetch_assoc();
+    ?>
 
     <body> 
         <h1>Apply for Field Permits</h1>
