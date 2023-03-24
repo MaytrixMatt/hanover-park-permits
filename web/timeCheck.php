@@ -5,7 +5,9 @@
         if(!isset($id)){
             $id = 1;
         }
-        
+        if(!isset($day_id)){
+            $day_id = 1;
+        }
         
     ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -168,37 +170,37 @@
         <div id = "timeList">
             <label for="priority" class="day-form-label">Day</label>
             <select id="day" name="priority" onchange="updateTimes()">
-                <option value="1"<?php if($id==1)echo "Selected"; ?>>1</option>
-                <option value="2"<?php if($id==2)echo "Selected"; ?>>2</option>
-                <option value="3"<?php if($id==3)echo "Selected"; ?>>3</option>
-                <option value="4"<?php if($id==4)echo "Selected"; ?>>4</option>
-                <option value="5"<?php if($id==5)echo "Selected"; ?>>5</option>
-                <option value="6"<?php if($id==6)echo "Selected"; ?>>6</option>
-                <option value="7"<?php if($id==7)echo "Selected"; ?>>7</option>
-                <option value="8"<?php if($id==8)echo "Selected"; ?>>8</option>
-                <option value="9"<?php if($id==9)echo "Selected"; ?>>9</option>
-                <option value="10"<?php if($id==10)echo "Selected"; ?>>10</option>
-                <option value="11"<?php if($id==11)echo "Selected"; ?>>11</option>
-                <option value="12"<?php if($id==12)echo "Selected"; ?>>12</option>
-                <option value="13"<?php if($id==13)echo "Selected"; ?>>13</option>
-                <option value="14"<?php if($id==14)echo "Selected"; ?>>14</option>
-                <option value="15"<?php if($id==15)echo "Selected"; ?>>15</option>
-                <option value="16"<?php if($id==16)echo "Selected"; ?>>16</option>
-                <option value="17"<?php if($id==17)echo "Selected"; ?>>17</option>
-                <option value="18"<?php if($id==18)echo "Selected"; ?>>18</option>
-                <option value="19"<?php if($id==19)echo "Selected"; ?>>19</option>
-                <option value="20"<?php if($id==20)echo "Selected"; ?>>20</option>
-                <option value="21"<?php if($id==21)echo "Selected"; ?>>21</option>
-                <option value="22"<?php if($id==22)echo "Selected"; ?>>22</option>
-                <option value="23"<?php if($id==23)echo "Selected"; ?>>23</option>
-                <option value="24"<?php if($id==24)echo "Selected"; ?>>24</option>
-                <option value="25"<?php if($id==25)echo "Selected"; ?>>25</option>
-                <option value="26"<?php if($id==26)echo "Selected"; ?>>26</option>
-                <option value="27"<?php if($id==27)echo "Selected"; ?>>27</option>
-                <option value="28"<?php if($id==28)echo "Selected"; ?>>28</option>
-                <option value="29"<?php if($id==29)echo "Selected"; ?>>29</option>
-                <option value="30"<?php if($id==30)echo "Selected"; ?>>30</option>
-                <option value="31"<?php if($id==31)echo "Selected"; ?>>31</option>
+                <option value="1"<?php if($day_id==1)echo "Selected"; ?>>1</option>
+                <option value="2"<?php if($day_id==2)echo "Selected"; ?>>2</option>
+                <option value="3"<?php if($day_id==3)echo "Selected"; ?>>3</option>
+                <option value="4"<?php if($day_id==4)echo "Selected"; ?>>4</option>
+                <option value="5"<?php if($day_id==5)echo "Selected"; ?>>5</option>
+                <option value="6"<?php if($day_id==6)echo "Selected"; ?>>6</option>
+                <option value="7"<?php if($day_id==7)echo "Selected"; ?>>7</option>
+                <option value="8"<?php if($day_id==8)echo "Selected"; ?>>8</option>
+                <option value="9"<?php if($day_id==9)echo "Selected"; ?>>9</option>
+                <option value="10"<?php if($day_id==10)echo "Selected"; ?>>10</option>
+                <option value="11"<?php if($day_id==11)echo "Selected"; ?>>11</option>
+                <option value="12"<?php if($day_id==12)echo "Selected"; ?>>12</option>
+                <option value="13"<?php if($day_id==13)echo "Selected"; ?>>13</option>
+                <option value="14"<?php if($day_id==14)echo "Selected"; ?>>14</option>
+                <option value="15"<?php if($day_id==15)echo "Selected"; ?>>15</option>
+                <option value="16"<?php if($day_id==16)echo "Selected"; ?>>16</option>
+                <option value="17"<?php if($day_id==17)echo "Selected"; ?>>17</option>
+                <option value="18"<?php if($day_id==18)echo "Selected"; ?>>18</option>
+                <option value="19"<?php if($day_id==19)echo "Selected"; ?>>19</option>
+                <option value="20"<?php if($day_id==20)echo "Selected"; ?>>20</option>
+                <option value="21"<?php if($day_id==21)echo "Selected"; ?>>21</option>
+                <option value="22"<?php if($day_id==22)echo "Selected"; ?>>22</option>
+                <option value="23"<?php if($day_id==23)echo "Selected"; ?>>23</option>
+                <option value="24"<?php if($day_id==24)echo "Selected"; ?>>24</option>
+                <option value="25"<?php if($day_id==25)echo "Selected"; ?>>25</option>
+                <option value="26"<?php if($day_id==26)echo "Selected"; ?>>26</option>
+                <option value="27"<?php if($day_id==27)echo "Selected"; ?>>27</option>
+                <option value="28"<?php if($day_id==28)echo "Selected"; ?>>28</option>
+                <option value="29"<?php if($day_id==29)echo "Selected"; ?>>29</option>
+                <option value="30"<?php if($day_id==30)echo "Selected"; ?>>30</option>
+                <option value="31"<?php if($day_id==31)echo "Selected"; ?>>31</option>
             </select>
             </select>
         </div>
