@@ -32,6 +32,10 @@
     </thead>
     <tbody>
         <?php
+
+
+
+
             // problem: drop down boxes are hard coded atm
             // solution: use javascript to store the results; use jquery to modify the drop downs
             
@@ -88,6 +92,14 @@
             // 2.) then the javascript will display the available days 
             // ***REMEMBER: AT THIS POINT IN TIME, WE ARE ONLY CHECKING WHO REQUESTED THE DATE (NO HOURLY LOGIC YET)
             
+            
+            $sqlRequestedDates = <<<SQL
+                SELECT app_date_req
+                FROM applications;
+            SQL;
+            $sqlRequestedDates = $conn->query($sqlRequestedDates);
+
+
             // How can someone in the future use this code to implement the hour-logic:
             // 1.) While accessing the fields and facilities, the times that each facility is accessed may also be requested
             // 2.) With the times requested in an array, javascript can perform the logic needed to display the available
