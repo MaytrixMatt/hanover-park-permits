@@ -31,4 +31,4 @@ function get_database_connection()
 
     return $conn;
 }
-</php>
+?>
