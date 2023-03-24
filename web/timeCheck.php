@@ -75,6 +75,8 @@
                 echo "<td>" . $row['fld_reserved'] . "</td>";
             }
             
+
+            
             // How can Jacob use this code to check time:
             // The time information from the "applications" table can be accessed using php
             // 1.) an sql statement can be written to check if anyone requested that date
