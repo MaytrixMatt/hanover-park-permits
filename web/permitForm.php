@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <html>
     <head> 
         <title>Field Park Permits</title>
@@ -22,7 +20,7 @@
         $result->fetch_assoc();
 =======
         //echo $result->fetch_assoc();
->>>>>>> 59e60759dc3df8362b73fc1d555ac8e1704aba1e
+>>>>>>> 59e60759dc3df8362b73fc1d555ac8e1704aba1e // What is this and what does it do? Just curious.
     ?>
 
     <body> 
@@ -80,7 +78,5 @@
             <input type="submit"/><br/>
 
         </form>
-
     </body>
-
 </html>
