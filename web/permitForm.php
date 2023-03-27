@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <html>
     <head> 
     <?php
@@ -34,6 +32,9 @@
         $conn = get_database_connection();
         $result = $conn->query($sql);
         $result->fetch_assoc();
+
+        //echo $result->fetch_assoc();
+
     ?>
 
     <body onload="loadFacsFields()"> 
@@ -303,5 +304,4 @@
         </div>
 
     </body>
-
 </html>
