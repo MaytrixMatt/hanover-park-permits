@@ -33,9 +33,6 @@
     <tbody>
         <?php
 
-
-
-
             // problem: drop down boxes are hard coded atm
             // solution: use javascript to store the results; use jquery to modify the drop downs
             
@@ -133,7 +130,6 @@
                     );
                 };
             }
-
 
 
             function updateFields(){
