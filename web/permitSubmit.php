@@ -18,17 +18,16 @@ include('library.php');
 
         $conn = get_database_connection();
 
+        // I don't know if we need lines 22-29, since this site won't be public we shouldn't worry about SQL injection / Cross-site Scripting
         $first_name = $conn->real_escape_string($first_name);
         $last_name = $conn->real_escape_string($last_name);
         $tier = $conn->real_escape_string($tier);
         $date_requested = $conn->real_escape_string($date_requested);
-        $start_time = $conn->real_escape_string($start_time);
-        $end_time = $conn->real_escape_string($end_time);
         $description = $conn->real_escape_string($description);
         $estimated_people = $conn->real_escape_string($estimated_people);
 
-        $sql = "INSERT INTO applications(app_cus_first_name, app_cus_last_name, app_tier, app_afl_id, app_date_req, app_start_time, app_end_time, app_description, app_estimated_people)" . 
-                "VALUES('$first_name', '$last_name', '$tier', '$afl_id', '$date_requested', '$start_time', '$end_time', '$description', '$estimated_people')";
+        $sql = "INSERT INTO applications(app_cus_first_name, app_cus_last_name, app_tier, app_afl_id, app_date_req, app_description, app_estimated_people)" . 
+                "VALUES('$first_name', '$last_name', '$tier', '$afl_id', '$date_requested', '$description', '$estimated_people')";
                 
         $conn->query($sql);
 
