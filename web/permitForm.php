@@ -38,7 +38,7 @@
     ?>
 
     <body onload="loadFacsFields()"> 
-        <div class = "application" width = 50px height = 100px float = left>
+        <div class = "application">
             <h1>Apply for Field Permits</h1>
 
             <form action="permitSubmit.php" method="POST"> 
