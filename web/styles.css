@@ -1,0 +1,12 @@
+.availability{
+    float: right;
+}
+
+.application{
+    width: 100;
+    height: 200;
+    float: left;
+}
+body{
+    background-color: honeydew;
+}

@@ -18,6 +18,7 @@ include('library.php');
 
         $conn = get_database_connection();
 
+        // I don't know if we need lines 22-29, since this site won't be public we shouldn't worry about SQL injection / Cross-site Scripting
         $first_name = $conn->real_escape_string($first_name);
         $last_name = $conn->real_escape_string($last_name);
         $tier = $conn->real_escape_string($tier);
