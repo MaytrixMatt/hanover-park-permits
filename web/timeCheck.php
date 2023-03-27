@@ -54,6 +54,8 @@
              // Iterate over each row in the results
             $curFac = '';
             $curFacFields = array();
+            
+            
             while ($row = $resultFacilitiesAndFields->fetch_assoc())
             {
                 if ($curFac != $row['loc_name'])
@@ -89,12 +91,21 @@
             // 2.) then the javascript will display the available days 
             // ***REMEMBER: AT THIS POINT IN TIME, WE ARE ONLY CHECKING WHO REQUESTED THE DATE (NO HOURLY LOGIC YET)
             
+
+            // 1.) Person selects a field; page will reload
+            // 2.) gives us chance to run another sql query
+            // 2b.) get the field chosen; see the dates chosen for that field; display date chosen
             
             $sqlRequestedDates = <<<SQL
-                SELECT app_date_req
-                FROM applications;
+                SELECT app_date_req, app_fld_id
+                FROM applications
+                ORDER BY app_fld_id DESC, app_date_req DESC 
+                ;
             SQL;
             $sqlRequestedDates = $conn->query($sqlRequestedDates);
+
+            // check if the dates for the selected field
+            
 
 
             // How can someone in the future use this code to implement the hour-logic:
@@ -104,39 +115,60 @@
         ?>
         <script>
             
-            var facilitiesAndFields = <?php echo json_encode($allFacsFields)?>;
+            var facilitiesAndFields = <?php echo json_encode($allFacsFields)?>; // key : value (map)
             var onlyFacs = <?php echo json_encode($onlyFacs)?>;
 
                         
-            function loadFacsFields() {
+            function loadFacilities() {
                 
                 // console.log(onlyFacs);
-                var facDropDown = $('#facility');
+                var facCheckBoxes = $('#facility');
                 for (var i = 0; i < onlyFacs.length; i++) {
+                    var checkBox = document.createElement('input');
+                    checkBox.type = 'checkbox';
+                    checkBox.id = 'fac_' + i;
+                    // checkBox.name = onlyFacs[i];
+                    checkBox.value = onlyFacs[i];
+                    checkBox.onclick = loadFields(onlyFacs[i]);
                     
-                    facDropDown.append(
-                        $('<option></option>').val(i + 1).html(onlyFacs[i])
-                    );
+
+                    facCheckBoxes.append(onlyFacs[i]);
+                    facCheckBoxes.append(checkBox);
+                    facCheckBoxes.append("<br>");
+                    // facDropDown.append(
+                    //     $('<option></option>').val(i + 1).html(onlyFacs[i])
+                    // );
                 }
-                facDropDown.val(<?php echo $id ?>);
 
 
-                var curFlds = facilitiesAndFields[onlyFacs[<?php echo $id?> - 1]];
-                var fldDropDown = $('#field');
-                for (var i = 0; i < curFlds.length; i++) {
+                //Drop Down Code
+                
+                // facDropDown.val(<?php echo $id ?>);
+
+
+                // var curFlds = facilitiesAndFields[onlyFacs[<?php echo $id?> - 1]];
+                // var fldDropDown = $('#field');
+                // for (var i = 0; i < curFlds.length; i++) {
                     
-                    fldDropDown.append(
-                        $('<option></option>').val(i + 1).html(curFlds[i])
-                    );
-                };
+                //     fldDropDown.append(
+                //         $('<option></option>').val(i + 1).html(curFlds[i])
+                //     );
+                // };
+                
             }
 
 
 
-            function updateFields(){
-                var id=$("#facility").val();
-                window.location.replace('timeCheck.php?id=' + id); //reloads the page; php code executes again
-            }
+
+
+
+            // Used for drop downs
+            // function updateFields(){
+            //     var id=$("#facility").val();
+            //     window.location.replace('timeCheck.php?id=' + id); //reloads the page; php code executes again
+            // }
+
+
             function updateTimes(){
                 var id=$("#time").val();
                 window.location.replace('timeCheck.php?id=' + id);
@@ -146,9 +178,14 @@
         
         <div class="mb-3">
         <label for="Facility" class="form-label">Facility</label>
-        <select class="form-select" id="facility" onchange="updateFields()" >
+        <!-- <select class="form-select" id="facility" onchange="updateFields()" >
             
-        </select>
+        </select> -->
+
+        </div>
+
+        <div id="facility">
+            
         </div>
         <br>
         <div id = "monthList">
