@@ -30,8 +30,6 @@ include('library.php');
 
         $sql = "INSERT INTO applications(app_cus_first_name, app_cus_last_name, app_tier, app_afl_id, app_date_req, app_start_time, app_end_time, app_desc, app_estim_people)" . 
                 "VALUES('$first_name', '$last_name', '$tier', '$afl_id', '$date_requested', '$start_time', '$end_time', '$description', '$estimated_people')";
-        $sql = "INSERT INTO applications(app_cus_first_name, app_cus_last_name, app_tier, app_afl_id, app_date_req, app_description, app_estimated_people)" . 
-                "VALUES('$first_name', '$last_name', '$tier', '$afl_id', '$date_requested', '$description', '$estimated_people')";
                 
         $conn->query($sql);
 
