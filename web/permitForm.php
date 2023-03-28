@@ -2,8 +2,8 @@
 <html>
     <head> 
     <?php
-        if(!isset($id)){
-            $id = 1;
+        if(!isset($facility_id)){
+            $facility_id = 1;
         }
         if(!isset($month_id)){
             $month_id = 1;
@@ -74,17 +74,11 @@
                 Date Requested:<br/>
                 <input type="date" name="date_requested" /><br/>
 
-                Start Time:<br/>
-                <input type="time" name="start_time" /><br/>
-
-                End Time:<br/>
-                <input type="time" name="end_time" /><br/>
-
                 Description of Activity:<br/>
                 <input type="text" name="description" /><br/>
 
                 Estimated People Attending:<br/>
-                <input type="text" name="estimated_people" /><br/>
+                <input type="text" name="estimated_people" value = "0"/><br/>
 
                 <br>
                 <input type="submit"/><br/>
@@ -114,7 +108,7 @@
             $conn = get_database_connection();
 
              // Build the SELECT statement
-             $sql = "SELECT * FROM fields WHERE fld_loc_id=".$id;
+             $sql = "SELECT * FROM fields WHERE fld_loc_id=".$facility_id;
      
              // Execute the query and save the results
              $result = $conn->query($sql);
@@ -183,53 +177,62 @@
             var onlyFacs = <?php echo json_encode($onlyFacs)?>;
 
                         
-            function loadFacsFields() {
+            // function loadFacsFields() {
                 
-                // console.log(onlyFacs);
-                var facDropDown = $('#facility');
-                for (var i = 0; i < onlyFacs.length; i++) {
+            //     // console.log(onlyFacs);
+            //     var facDropDown = $('#facility');
+            //     for (var i = 0; i < onlyFacs.length; i++) {
                     
-                    facDropDown.append(
-                        $('<option></option>').val(i + 1).html(onlyFacs[i])
-                    );
-                }
-                facDropDown.val(<?php echo $id ?>);
+            //         facDropDown.append(
+            //             $('<option></option>').val(i + 1).html(onlyFacs[i])
+            //         );
+            //     }
+            //     facDropDown.val(<?php echo $id ?>);
 
 
-                var curFlds = facilitiesAndFields[onlyFacs[<?php echo $id?> - 1]];
-                var fldDropDown = $('#field');
-                for (var i = 0; i < curFlds.length; i++) {
+            //     var curFlds = facilitiesAndFields[onlyFacs[<?php echo $id?> - 1]];
+            //     var fldDropDown = $('#field');
+            //     for (var i = 0; i < curFlds.length; i++) {
                     
-                    fldDropDown.append(
-                        $('<option></option>').val(i + 1).html(curFlds[i])
-                    );
-                };
-            }
+            //         fldDropDown.append(
+            //             $('<option></option>').val(i + 1).html(curFlds[i])
+            //         );
+            //     };
+            // }
 
 
 
-            function updateFields(){
+            function updateFacility(){
                 var id=$("#facility").val();
-                window.location.replace('timeCheck.php?id=' + id); //reloads the page; php code executes again
+                window.location.replace('permitForm.php?id=' + id); //reloads the page; php code executes again
             }
             function updateMonth(){
                 var month_id=$("#year").val();
-                window.location.replace('timeCheck.php?id=' + id);
+                window.location.replace('permitForm.php?id=' + id);
             }
             function updateDays(){
                 var day_id=$("#day").val();
-                window.location.replace('timeCheck.php?id=' + id);
+                window.location.replace('permitForm.php?id=' + id);
             }
             function updateYear(){
                 var year_id=$("#year").val();
-                window.location.replace('timeCheck.php?id=' + id);
+                window.location.replace('permitForm.php?id=' + id);
+            }
+            function updateFields(){
+                var id=$("#field").val();
+                window.location.replace('permitForm.php?id=' + id); //reloads the page; php code executes again
             }
         </script>
         
-        <div class="mb-3">
-        <label for="Facility" class="form-label">Facility</label>
-        <select class="form-select" id="facility" onchange="updateFields()" >
-            
+        <div id ="facility">
+        <label for="Facility" class="facility-form-label">Facility</label>
+        <select class="form-select" id="facility" onchange="updateFacility()" >
+                <option value="1"<?php if($facility_id==1)echo "Selected"; ?>>Briggs Field</option>
+                <option value="2"<?php if($facility_id==2)echo "Selected"; ?>>Ceurvels Field</option>
+                <option value="3"<?php if($facility_id==3)echo "Selected"; ?>>Calvin J. Ellis Field</option>
+                <option value="4"<?php if($facility_id==4)echo "Selected"; ?>>Forge Pond Park</option>
+                <option value="5"<?php if($facility_id==5)echo "Selected"; ?>>Amos Gallant Field</option>
+                <option value="6"<?php if($facility_id==6)echo "Selected"; ?>>B. Everett Hall</option>
         </select>
         </div>
         <br>
@@ -293,7 +296,7 @@
        <br>
         <div id = "fieldList">
             <label for="priority" class="field-form-label">Field</label>
-            <select id="field" name="priority" onchange="">
+            <select id="field" name="priority" onchange="updateFields()">
             </select>
         </div>
     </tbody>

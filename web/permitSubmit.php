@@ -27,11 +27,10 @@ include('library.php');
         $estimated_people = $conn->real_escape_string($estimated_people);
         $afl_id = $conn->real_escape_string($afl_id);
 
-
-        $sql = "INSERT INTO applications(app_cus_first_name, app_cus_last_name, app_tier, app_afl_id, app_date_req, app_start_time, app_end_time, app_desc, app_estim_people)" . 
-                "VALUES('$first_name', '$last_name', '$tier', '$afl_id', '$date_requested', '$start_time', '$end_time', '$description', '$estimated_people')";
+        $sql = "INSERT INTO applications(app_cus_first_name, app_cus_last_name, app_tier, app_afl_id, app_date_req, app_desc, app_estim_people)" . 
+                "VALUES('$first_name', '$last_name', '$tier', '$afl_id', '$date_requested', '$description', '$estimated_people')";
                 
-        $conn->query($sql);
+        // $conn->query($sql);
 
         if ($conn->query($sql) == TRUE)
         {
