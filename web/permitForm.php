@@ -74,6 +74,12 @@
                 Date Requested:<br/>
                 <input type="date" name="date_requested" /><br/>
 
+                Start Time:<br/>
+                <input type="time" name="start_time" /><br/>
+
+                End Time:<br/>
+                <input type="time" name="end_time" /><br/>
+
                 Description of Activity:<br/>
                 <input type="text" name="description" /><br/>
 
