@@ -81,7 +81,7 @@
                 <input type="text" name="description" /><br/>
 
                 Estimated People Attending:<br/>
-                <input type="text" name="estimated_people" /><br/>
+                <input type="text" name="estimated_people" value = "0"/><br/>
 
                 <br>
                 <input type="submit"/><br/>
