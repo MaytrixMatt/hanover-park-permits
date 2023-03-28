@@ -32,8 +32,6 @@
         $conn = get_database_connection();
         $result = $conn->query($sql);
         $result->fetch_assoc();
-
-
     ?>
 
     <body onload="loadFacsFields()"> 
