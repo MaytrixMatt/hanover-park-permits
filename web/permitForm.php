@@ -177,28 +177,28 @@
             var onlyFacs = <?php echo json_encode($onlyFacs)?>;
 
                         
-            function loadFacsFields() {
+            // function loadFacsFields() {
                 
-                // console.log(onlyFacs);
-                var facDropDown = $('#facility');
-                for (var i = 0; i < onlyFacs.length; i++) {
+            //     // console.log(onlyFacs);
+            //     var facDropDown = $('#facility');
+            //     for (var i = 0; i < onlyFacs.length; i++) {
                     
-                    facDropDown.append(
-                        $('<option></option>').val(i + 1).html(onlyFacs[i])
-                    );
-                }
-                facDropDown.val(<?php echo $id ?>);
+            //         facDropDown.append(
+            //             $('<option></option>').val(i + 1).html(onlyFacs[i])
+            //         );
+            //     }
+            //     facDropDown.val(<?php echo $id ?>);
 
 
-                var curFlds = facilitiesAndFields[onlyFacs[<?php echo $id?> - 1]];
-                var fldDropDown = $('#field');
-                for (var i = 0; i < curFlds.length; i++) {
+            //     var curFlds = facilitiesAndFields[onlyFacs[<?php echo $id?> - 1]];
+            //     var fldDropDown = $('#field');
+            //     for (var i = 0; i < curFlds.length; i++) {
                     
-                    fldDropDown.append(
-                        $('<option></option>').val(i + 1).html(curFlds[i])
-                    );
-                };
-            }
+            //         fldDropDown.append(
+            //             $('<option></option>').val(i + 1).html(curFlds[i])
+            //         );
+            //     };
+            // }
 
 
 
