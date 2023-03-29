@@ -22,7 +22,7 @@
 
     <title>Time Checker</title>
 </head>
-<body onload="loadFacsFields()">
+<body onload="loadFacilities()">
     <table class="table">
     <thead>
         <tr>
@@ -50,6 +50,8 @@
                     JOIN location ON loc_id = fld_loc_id;
                     SQL;
             $resultFacilitiesAndFields = $conn->query($sqlFacilitiesAndFields);
+            
+            
             
             $allFacsFields = array();
             $onlyFacs = array();
@@ -99,12 +101,17 @@
             // 2b.) get the field chosen; see the dates chosen for that field; display date chosen
             
             $sqlRequestedDates = <<<SQL
-                SELECT app_date_req, app_fld_id
+                SELECT app_date_req, app_fld_id, app_fld_name
                 FROM applications
                 ORDER BY app_fld_id DESC, app_date_req DESC 
                 ;
             SQL;
             $sqlRequestedDates = $conn->query($sqlRequestedDates);
+            //  $sqlRequestedDates stores information about 
+            // 1.) each field has
+            // 2.) dates requested
+
+            // Problem: application only has access to one id
 
             // check if the dates for the selected field
             
@@ -131,7 +138,7 @@
                     checkBox.id = 'fac_' + i;
                     // checkBox.name = onlyFacs[i];
                     checkBox.value = onlyFacs[i];
-                    checkBox.onclick = loadFields(onlyFacs[i]);
+                    // checkBox.onclick = loadFields(onlyFacs[i]);
                     
 
                     facCheckBoxes.append(onlyFacs[i]);
