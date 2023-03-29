@@ -100,18 +100,40 @@
             // 2.) gives us chance to run another sql query
             // 2b.) get the field chosen; see the dates chosen for that field; display date chosen
             
-            $sqlRequestedDates = <<<SQL
-                SELECT app_date_req, app_fld_id, app_fld_name
+            $sqlReqFldsAndDates = <<<SQL
+                SELECT app_date_req, app_afl_id
                 FROM applications
-                ORDER BY app_fld_id DESC, app_date_req DESC 
-                ;
+                ORDER BY app_afl_id DESC, app_date_req DESC 
             SQL;
-            $sqlRequestedDates = $conn->query($sqlRequestedDates);
-            //  $sqlRequestedDates stores information about 
-            // 1.) each field has
-            // 2.) dates requested
+            $sqlReqFldsAndDates = $conn->query($sqlReqFldsAndDates);
 
-            // Problem: application only has access to one id
+            $allFieldsDates = array();
+
+            $onlyFields = array();
+
+            $curField = '';
+
+            $curFieldsDates = array();
+
+
+            while ($row = $sqlReqFldsAndDates->fetch_assoc())
+            {
+                if ($curField != $row['app_afl_id'])
+                {
+                    if ($curField != '') 
+                    {
+                        $allFieldsDates[$curField] = $curFieldsDates;
+                        $curFieldsDates = array_diff($curFieldsDates, $curFieldsDates);                      
+                    }
+                    
+                    $curField = $row['app_afl_id'];
+                    // echo $curFac;
+                    array_push($onlyFields, $curField);
+                }
+                array_push($curFieldsDates, $row['app_afl_id']);
+                
+            }
+            $allFieldsDates [$curField] = $curFieldsDates; 
 
             // check if the dates for the selected field
             
@@ -126,6 +148,9 @@
             
             var facilitiesAndFields = <?php echo json_encode($allFacsFields)?>; // key : value (map)
             var onlyFacs = <?php echo json_encode($onlyFacs)?>;
+
+            var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>;
+            var onlyFields = <?php echo json_encode($onlyFields)?>;
 
                         
             function loadFacilities() {
@@ -149,7 +174,6 @@
                     // );
                 }
 
-
                 //Drop Down Code
                 
                 // facDropDown.val(<?php echo $id ?>);
@@ -166,8 +190,21 @@
                 
             }
 
+            function loadFields() {
+                var fieldCheckBoxes = $('#field');
+                for (var i = 0; i < onlyfields.length; i++) {
+                    var checkBox = document.createElement('input');
+                    checkBox.type = 'checkbox';
+                    checkBox.id = 'fld_' + onlyFields[i];
+                    checkBox.value = onlyFields[i];
+                    checkBox.onclick = loadFields(onlyFields[i]);
+                    
 
-
+                    fieldCheckBoxes.append(onlyFields[i]);
+                    fieldCheckBoxes.append(checkBox);
+                    fieldCheckBoxes.append("<br>");
+                }
+            }
 
 
             // Used for drop downs
@@ -212,6 +249,9 @@
                 <option value="12"<?php if($month_id==12)echo "Selected"; ?>>December</option>
             </select>
         
+
+
+
             <label for="priority" class="day-form-label">Day</label>
             <select id="day" name="priority" onchange = "updateDays()">
                 <option value="1"<?php if($day_id==1)echo "Selected"; ?>>1</option>
