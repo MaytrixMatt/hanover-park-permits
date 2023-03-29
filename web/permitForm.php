@@ -14,6 +14,9 @@
         if(!isset($year_id)){
             $year_id = 1;
         }
+        if(!isset($field_id)){
+            $field_id = 1;
+        }
     ?>
         <link rel="stylesheet" type="text/css" href="styles.css">
         <title>Field Park Permits</title>
@@ -219,7 +222,7 @@
                 window.location.replace('permitForm.php?id=' + id);
             }
             function updateFields(){
-                var id=$("#field").val();
+                var field_id=$("#field").val();
                 window.location.replace('permitForm.php?id=' + id); //reloads the page; php code executes again
             }
         </script>
@@ -297,6 +300,40 @@
         <div id = "fieldList">
             <label for="priority" class="field-form-label">Field</label>
             <select id="field" name="priority" onchange="updateFields()">
+                <option value="1"<?php if($field_id==1)echo "Selected"; ?>>T-Ball</option>
+                <option value="2"<?php if($field_id==1)echo "Selected"; ?>>Other</option>
+                <option value="3"<?php if($field_id==2)echo "Selected"; ?>>Full-size Baseball</option>
+                <option value="4"<?php if($field_id==2)echo "Selected"; ?>>Little League</option>
+                <option value="5"<?php if($field_id==2)echo "Selected"; ?>>Softball</option>
+                <option value="6"<?php if($field_id==2)echo "Selected"; ?>>Lacrosse</option>
+                <option value="7"<?php if($field_id==2)echo "Selected"; ?>>Soccer</option>
+                <option value="8"<?php if($field_id==2)echo "Selected"; ?>>Basketball</option>
+                <option value="9"<?php if($field_id==2)echo "Selected"; ?>>Other</option>
+                <option value="10"<?php if($field_id==3)echo "Selected"; ?>>Little League #1</option>
+                <option value="11"<?php if($field_id==3)echo "Selected"; ?>>Little League #2</option>
+                <option value="12"<?php if($field_id==3)echo "Selected"; ?>>Little League #3</option>
+                <option value="12"<?php if($field_id==3)echo "Selected"; ?>>Soccer</option>
+                <option value="13"<?php if($field_id==3)echo "Selected"; ?>>Other</option>
+                <option value="14"<?php if($field_id==4)echo "Selected"; ?>>Little League #1</option>
+                <option value="15"<?php if($field_id==4)echo "Selected"; ?>>Little League #2</option>
+                <option value="16"<?php if($field_id==4)echo "Selected"; ?>>Little League #3</option>
+                <option value="17"<?php if($field_id==4)echo "Selected"; ?>>Softball #4</option>
+                <option value="18"<?php if($field_id==4)echo "Selected"; ?>>Softball #5</option>
+                <option value="19"<?php if($field_id==4)echo "Selected"; ?>>Softball #6</option>
+                <option value="20"<?php if($field_id==4)echo "Selected"; ?>>Multi Use Soccer</option>
+                <option value="21"<?php if($field_id==4)echo "Selected"; ?>>Multi Use Lacrosse</option>
+                <option value="22"<?php if($field_id==4)echo "Selected"; ?>>Multi Use Other</option>
+                <option value="23"<?php if($field_id==4)echo "Selected"; ?>>Pavilion</option>
+                <option value="24"<?php if($field_id==4)echo "Selected"; ?>>Kitchen & Pavilion</option>
+                <option value="25"<?php if($field_id==4)echo "Selected"; ?>>Other</option>
+                <option value="26"<?php if($field_id==5)echo "Selected"; ?>>Other</option>
+                <option value="27"<?php if($field_id==6)echo "Selected"; ?>>Full Size Baseball</option>
+                <option value="28"<?php if($field_id==6)echo "Selected"; ?>>Little League</option>
+                <option value="29"<?php if($field_id==6)echo "Selected"; ?>>Basketball 1</option>
+                <option value="30"<?php if($field_id==6)echo "Selected"; ?>>Basketball 2</option>
+                <option value="31"<?php if($field_id==6)echo "Selected"; ?>>Football</option>
+                <option value="32"<?php if($field_id==6)echo "Selected"; ?>>Street Hockey Rink</option>
+                <option value="33"<?php if($field_id==6)echo "Selected"; ?>>Other</option>
             </select>
         </div>
     </tbody>
