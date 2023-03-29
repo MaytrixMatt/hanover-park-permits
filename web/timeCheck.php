@@ -44,37 +44,42 @@
              // Execute the query and save the results
              $result = $conn->query($sql);
             
-             $sqlFacilitiesAndFields = <<<SQL
-                    SELECT fld_id, fld_loc_id, fld_name, loc_name
+            $sqlFacilitiesAndFields = <<<SQL
+                    SELECT fld_id, fld_loc_id, fld_name, loc_name, loc_id
                     FROM fields
-                    JOIN location ON loc_id = fld_loc_id;
-                    SQL;
+                    JOIN location ON loc_id = fld_loc_id
+            SQL;
             $resultFacilitiesAndFields = $conn->query($sqlFacilitiesAndFields);
             
             
             
             $allFacsFields = array();
             $onlyFacs = array();
+            $onlyFacsID = array();
+            $allFacsAndIDs = array();
              // Iterate over each row in the results
-            $curFac = '';
+            $curFac = -1;
             $curFacFields = array();
-            
+            $allFldsAndIDs = array();
             
             while ($row = $resultFacilitiesAndFields->fetch_assoc())
             {
-                if ($curFac != $row['loc_name'])
+                if ($curFac != $row['loc_id'])
                 {
-                    if ($curFac != '') 
+                    if ($curFac != -1) 
                     {
                         $allFacsFields[$curFac] = $curFacFields;
                         $curFacFields = array_diff($curFacFields, $curFacFields);                      
                     }
                     
-                    $curFac = $row['loc_name'];
-                    // echo $curFac;
-                    array_push($onlyFacs, $curFac);
+                    $curFac = $row['loc_id'];
+                    array_push($onlyFacsID, $row['loc_id']);
+                    array_push($onlyFacs, $row['loc_name']);
+                    $allFacsAndIDs[$row['loc_id']] = $row['loc_name'];
                 }
-                array_push($curFacFields, $row['fld_name']);
+                array_push($curFacFields, $row['fld_id']);
+
+                $allFldsAndIDs[$row['fld_id']] = $row['fld_name'];
                 
             }
             $allFacsFields[$curFac] = $curFacFields; //fence post case for the last facility
@@ -89,6 +94,7 @@
             
 
             
+
             // How can Jacob use this code to check time:
             // The time information from the "applications" table can be accessed using php
             // 1.) an sql statement can be written to check if anyone requested that date
@@ -100,19 +106,25 @@
             // 2.) gives us chance to run another sql query
             // 2b.) get the field chosen; see the dates chosen for that field; display date chosen
             
+            // need facility ids with each of the field ids
+
+
+
+            // This SQL statement is necesary for finding the dates requested
+            // SQL statement finds all field IDs and matches them with the dates
+            // each field was requested.
             $sqlReqFldsAndDates = <<<SQL
                 SELECT app_date_req, app_afl_id
                 FROM applications
                 ORDER BY app_afl_id DESC, app_date_req DESC 
             SQL;
-            $sqlReqFldsAndDates = $conn->query($sqlReqFldsAndDates);
 
+            $sqlReqFldsAndDates = $conn->query($sqlReqFldsAndDates);
             $allFieldsDates = array();
 
-            $onlyFields = array();
+            $reqFieldsID = array();
 
             $curField = '';
-
             $curFieldsDates = array();
 
 
@@ -127,14 +139,13 @@
                     }
                     
                     $curField = $row['app_afl_id'];
-                    // echo $curFac;
-                    array_push($onlyFields, $curField);
+                    array_push($reqFieldsID, $row['app_afl_id']);
                 }
                 array_push($curFieldsDates, $row['app_afl_id']);
                 
             }
             $allFieldsDates [$curField] = $curFieldsDates; 
-
+            
             // check if the dates for the selected field
             
 
@@ -143,32 +154,49 @@
             // 1.) While accessing the fields and facilities, the times that each facility is accessed may also be requested
             // 2.) With the times requested in an array, javascript can perform the logic needed to display the available
             //      times that the user is allowed to request
+
+
+
+            // $sqlAvailableDates = <
+
+            // idea for checking all applications where the requested date is NOT
+            // 1.) Use a for loop
+            // 2.) Use reqFieldsID[i] to access the requested dates for that field 
+            //      through allFieldsDates[reqFieldsID[i]]
+            //      ----This returns a list of requested dates for that field
+            // 3.) Generate a string: iterate throug the list to generate a string 
+            //      for the boolean condition of the future sql statement
         ?>
         <script>
             
             var facilitiesAndFields = <?php echo json_encode($allFacsFields)?>; // key : value (map)
-            var onlyFacs = <?php echo json_encode($onlyFacs)?>;
+            var onlyFacs = <?php echo json_encode($onlyFacs)?>; //holds facility names
+            var onlyFacsID = <?php echo json_encode($onlyFacsID)?>; //holds facility IDs
+            var facsID_facsNames = <?php echo json_encode($allFacsAndIDs)?>;
 
-            var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>;
-            var onlyFields = <?php echo json_encode($onlyFields)?>;
+            // var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
+            // var reqFieldsID = <?php echo json_encode($onlyFieldsID)?>; //holds the ids for the fields ****NYI****
+            var fldID_fldNames = <?php echo json_encode($allFldsAndIDs)?>; // key (field_id) : value (field_name)
+            // fieldsIDs don't start at 1 nor 0!!!!
+            // console.log(onlyFieldsID);
 
-                        
+            
+
             function loadFacilities() {
                 
                 // console.log(onlyFacs);
                 var facCheckBoxes = $('#facility');
                 for (var i = 0; i < onlyFacs.length; i++) {
-                    var checkBox = document.createElement('input');
-                    checkBox.type = 'checkbox';
-                    checkBox.id = 'fac_' + i;
-                    // checkBox.name = onlyFacs[i];
-                    checkBox.value = onlyFacs[i];
-                    // checkBox.onclick = loadFields(onlyFacs[i]);
-                    
+                    var onclickFunc = 'loadFields(\"' + onlyFacsID[i] + '\");';
+                    var lbl = $('<label/>', {id: 'label_fac_' + onlyFacsID[i], text: onlyFacs[i]});
+                    lbl.append(
+                        $('<input/>', {type: 'checkbox', id: 'fac_' + onlyFacsID[i], value: onlyFacsID[i].toString(), onclick: onclickFunc})
+                    );
 
-                    facCheckBoxes.append(onlyFacs[i]);
-                    facCheckBoxes.append(checkBox);
+                    lbl.appendTo(facCheckBoxes);
                     facCheckBoxes.append("<br>");
+                    // loadFields(onlyFacs[i])
+                    // $("#fac_" + i).click(loadFields(onlyFacs[i]));
                     // facDropDown.append(
                     //     $('<option></option>').val(i + 1).html(onlyFacs[i])
                     // );
@@ -190,49 +218,102 @@
                 
             }
 
-            function loadFields() {
-                var fieldCheckBoxes = $('#field');
-                for (var i = 0; i < onlyfields.length; i++) {
-                    var checkBox = document.createElement('input');
-                    checkBox.type = 'checkbox';
-                    checkBox.id = 'fld_' + onlyFields[i];
-                    checkBox.value = onlyFields[i];
-                    checkBox.onclick = loadFields(onlyFields[i]);
-                    
+           
 
-                    fieldCheckBoxes.append(onlyFields[i]);
-                    fieldCheckBoxes.append(checkBox);
-                    fieldCheckBoxes.append("<br>");
+            // This function loads fields as checkboxes
+            // -Is run as an onclick function on each facility checkbox
+            // 1.) check the value of the facility that ran this function
+            // 2.) set the visibility to hidden 
+            function loadFields(facID) {
+                // console.log("This facility ID was loaded: " + facID);
+                
+                var fieldCheckBoxes = $('#fields');
+                var correspFldIDs = facilitiesAndFields[facID];
+                var fac = facsID_facsNames[facID];
+                var facCheckboxStatus = $('#fac_' + facID).is(':checked'); //was the checkbox checked????
+                
+                for (var i = 0; i < correspFldIDs.length; i++) {
+                    var curFieldID = correspFldIDs[i];
+                    
+                    // var onclickFunc = 
+                    
+                    if (facCheckboxStatus) {
+
+                        console.log(fldID_fldNames[curFieldID]);
+                        var fldName = fldID_fldNames[curFieldID];
+
+                        var onclickFunc = 'checkDateAvail(' + curFieldID + ')';
+                        var lbl = $('<label/>', {for: 'fld_' + curFieldID, text: fac + ' @ ' + fldName, id: 'label_fld_' + curFieldID});
+                        lbl.append(
+                            $('<input/>', {type: 'checkbox', id: 'fld_' + curFieldID, value: fac + '_' + curFieldID})
+                        );
+                        lbl.appendTo(fieldCheckBoxes);
+                    
+                    } else if (!facCheckboxStatus) {
+
+                        console.log("Deleting element: Field ID " + curFieldID );
+                        $('#fld_' + curFieldID).remove();
+                        $('#label_fld_'+ curFieldID).remove();
+
+                    }
+
+                    
                 }
+                
             }
 
 
-            // Used for drop downs
-            // function updateFields(){
-            //     var id=$("#facility").val();
-            //     window.location.replace('timeCheck.php?id=' + id); //reloads the page; php code executes again
+            // function updateMonth(){
+            //     var month_id=$("#year").val();
+            //     window.location.replace('permitForm.php?id=' + id);
+            // }
+            // function updateDays(){
+            //     var day_id=$("#day").val();
+            //     window.location.replace('permitForm.php?id=' + id);
+            // }
+            // function updateYear(){
+            //     var year_id=$("#year").val();
+            //     window.location.replace('permitForm.php?id=' + id);
             // }
 
-
             function updateTimes(){
-                var id=$("#time").val();
-                window.location.replace('timeCheck.php?id=' + id);
+                var reqDate=$("#reqDate").val(); //takes the form of a string YYY-MM-DD
+                
+                // var year = parseInt(reqDate.substring(0, 4));
+                // var month = parseInt(reqDate.substring(5, 7));
+                // var date = parseInt(reqDate.substring(8, 10));
+
+                //1.) Have PHP run a sql query to request the fields that are available
+                window.location.replace('timeCheck.php?reqDate=' + reqDate);
+
+                //2.) Have PHP run a sql query to show the dates available for the fields chosen
+                // SQL statement should show all dates in the month that are NOT the dates requested
             }
         </script>
         
-        <div class="mb-3">
+        <!-- <div class="mb-3">
         <label for="Facility" class="form-label">Facility</label>
-        <!-- <select class="form-select" id="facility" onchange="updateFields()" >
+        <select class="form-select" id="facility" onchange="updateFields()" >
             
-        </select> -->
+        </select>
 
-        </div>
+        </div> -->
+        <style>
+            label {
+                display: block;
+            }
+            input {
+                display: inline-block;
+            }
+        </style>
 
         <div id="facility">
             
         </div>
         <br>
-        <div id = "monthList">
+
+        <input type='date' id='reqDate' onchange='updateTime()'>
+        <!-- <div id = "monthList">
             <label for="monthlist" class="field-form-label">Month</label>
             <select id="monthlist" name="monthlist" onchange="updateMonth()">
                 <option value="1"<?php if($month_id==1)echo "Selected"; ?>>January</option>
@@ -291,16 +372,23 @@
                 <option value="1"<?php if($year_id==1)echo "Selected"; ?>>2023</option>
                 <option value="2"<?php if($year_id==2)echo "Selected"; ?>>2024</option>
             </select>
-        </div>
-        <div id="facility">
-           
-
-        </div>
-        <div id = "fieldList">
+        </div> -->
+        <!-- <div id = "fieldList">
             <label for="priority" class="field-form-label">Field</label>
             <select id="field" name="priority" onchange="">
             </select>
+        </div> -->
+        <br>
+        <br>
+        <br>
+        Fields
+        <div id="fields">
+
         </div>
+
+        <br>
+        <br>
+
     </tbody>
     </table>
 </body>
