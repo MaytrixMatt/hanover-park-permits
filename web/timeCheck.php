@@ -5,18 +5,15 @@
         if(!isset($id)){
             $id = 1;
         }
-        if(!isset($reqDate)) {
-            $reqDate = "2023-01-01"; 
+        if(!isset($month_id)){
+            $month_id = 1;
         }
-        // if(!isset($month_id)){
-        //     $month_id = 1;
-        // }
-        // if(!isset($day_id)){
-        //     $day_id = 1;
-        // }
-        // if(!isset($year_id)){
-        //     $year_id = 1;
-        // }
+        if(!isset($day_id)){
+            $day_id = 1;
+        }
+        if(!isset($year_id)){
+            $year_id = 1;
+        }
     ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
@@ -159,7 +156,12 @@
             //      times that the user is allowed to request
 
 
-
+            echo json_encode($allFacsFields);
+            echo json_encode($onlyFacs);
+            echo json_encode($onlyFacsID);
+            echo json_encode($allFacsAndIDs);
+            echo json_encode($allFieldsDates);
+            echo json_encode($allFldsAndIDs);
             // $sqlAvailableDates = <
 
             // idea for checking all applications where the requested date is NOT
@@ -169,9 +171,6 @@
             //      ----This returns a list of requested dates for that field
             // 3.) Generate a string: iterate throug the list to generate a string 
             //      for the boolean condition of the future sql statement
-
-
-            // what fields are available for a given date
         ?>
         <script>
             
@@ -180,8 +179,8 @@
             var onlyFacsID = <?php echo json_encode($onlyFacsID)?>; //holds facility IDs
             var facsID_facsNames = <?php echo json_encode($allFacsAndIDs)?>;
 
-            var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
-            // var reqFieldsID = <?php echo json_encode($onlyFieldsID)?>; //holds the ids for the fields ****NYI****
+            // var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
+            
             var fldID_fldNames = <?php echo json_encode($allFldsAndIDs)?>; // key (field_id) : value (field_name)
             // fieldsIDs don't start at 1 nor 0!!!!
             // console.log(onlyFieldsID);
@@ -190,23 +189,23 @@
 
             function loadFacilities() {
                 
-                // console.log(onlyFacs);
-                var facCheckBoxes = $('#facility');
-                for (var i = 0; i < onlyFacs.length; i++) {
-                    var onclickFunc = 'loadFields(\"' + onlyFacsID[i] + '\");';
-                    var lbl = $('<label/>', {id: 'label_fac_' + onlyFacsID[i], text: onlyFacs[i]});
-                    lbl.append(
-                        $('<input/>', {type: 'checkbox', id: 'fac_' + onlyFacsID[i], value: onlyFacsID[i].toString(), onclick: onclickFunc})
-                    );
+                console.log("hellowhdlksa");
+                // var facCheckBoxes = $('#facility');
+                // for (var i = 0; i < onlyFacs.length; i++) {
+                //     var onclickFunc = 'loadFields(\"' + onlyFacsID[i] + '\");';
+                //     var lbl = $('<label/>', {id: 'label_fac_' + onlyFacsID[i], text: onlyFacs[i]});
+                //     lbl.append(
+                //         $('<input/>', {type: 'checkbox', id: 'fac_' + onlyFacsID[i], value: onlyFacsID[i].toString(), onclick: onclickFunc})
+                //     );
 
-                    lbl.appendTo(facCheckBoxes);
-                    facCheckBoxes.append("<br>");
-                    // loadFields(onlyFacs[i])
-                    // $("#fac_" + i).click(loadFields(onlyFacs[i]));
-                    // facDropDown.append(
-                    //     $('<option></option>').val(i + 1).html(onlyFacs[i])
-                    // );
-                }
+                //     lbl.appendTo(facCheckBoxes);
+                //     facCheckBoxes.append("<br>");
+                //     // loadFields(onlyFacs[i])
+                //     // $("#fac_" + i).click(loadFields(onlyFacs[i]));
+                //     // facDropDown.append(
+                //     //     $('<option></option>').val(i + 1).html(onlyFacs[i])
+                //     // );
+                // }
 
                 //Drop Down Code
                 
@@ -230,43 +229,43 @@
             // -Is run as an onclick function on each facility checkbox
             // 1.) check the value of the facility that ran this function
             // 2.) set the visibility to hidden 
-            function loadFields(facID) {
-                // console.log("This facility ID was loaded: " + facID);
+            // function loadFields(facID) {
+            //     // console.log("This facility ID was loaded: " + facID);
                 
-                var fieldCheckBoxes = $('#fields');
-                var correspFldIDs = facilitiesAndFields[facID];
-                var fac = facsID_facsNames[facID];
-                var facCheckboxStatus = $('#fac_' + facID).is(':checked'); //was the checkbox checked????
+            //     var fieldCheckBoxes = $('#fields');
+            //     var correspFldIDs = facilitiesAndFields[facID];
+            //     var fac = facsID_facsNames[facID];
+            //     var facCheckboxStatus = $('#fac_' + facID).is(':checked'); //was the checkbox checked????
                 
-                for (var i = 0; i < correspFldIDs.length; i++) {
-                    var curFieldID = correspFldIDs[i];
+            //     for (var i = 0; i < correspFldIDs.length; i++) {
+            //         var curFieldID = correspFldIDs[i];
                     
-                    // var onclickFunc = 
+            //         // var onclickFunc = 
                     
-                    if (facCheckboxStatus) {
+            //         if (facCheckboxStatus) {
 
-                        console.log(fldID_fldNames[curFieldID]);
-                        var fldName = fldID_fldNames[curFieldID];
+            //             console.log(fldID_fldNames[curFieldID]);
+            //             var fldName = fldID_fldNames[curFieldID];
 
-                        var onclickFunc = 'checkDateAvail(' + curFieldID + ')';
-                        var lbl = $('<label/>', {for: 'fld_' + curFieldID, text: fac + ' @ ' + fldName, id: 'label_fld_' + curFieldID});
-                        lbl.append(
-                            $('<input/>', {type: 'checkbox', id: 'fld_' + curFieldID, value: fac + '_' + curFieldID})
-                        );
-                        lbl.appendTo(fieldCheckBoxes);
+            //             var onclickFunc = 'checkDateAvail(' + curFieldID + ')';
+            //             var lbl = $('<label/>', {for: 'fld_' + curFieldID, text: fac + ' @ ' + fldName, id: 'label_fld_' + curFieldID});
+            //             lbl.append(
+            //                 $('<input/>', {type: 'checkbox', id: 'fld_' + curFieldID, value: fac + '_' + curFieldID})
+            //             );
+            //             lbl.appendTo(fieldCheckBoxes);
                     
-                    } else if (!facCheckboxStatus) {
+            //         } else if (!facCheckboxStatus) {
 
-                        console.log("Deleting element: Field ID " + curFieldID );
-                        $('#fld_' + curFieldID).remove();
-                        $('#label_fld_'+ curFieldID).remove();
+            //             console.log("Deleting element: Field ID " + curFieldID );
+            //             $('#fld_' + curFieldID).remove();
+            //             $('#label_fld_'+ curFieldID).remove();
 
-                    }
+            //         }
 
                     
-                }
+            //     }
                 
-            }
+            // }
 
 
             // function updateMonth(){
@@ -282,20 +281,19 @@
             //     window.location.replace('permitForm.php?id=' + id);
             // }
 
-            function checkDate(){
-                var reqDate=$("#reqDate").val(); //takes the form of a string YYYY-MM-DD
-                console.log(reqDate);
+            // function updateTimes(){
+            //     var reqDate=$("#reqDate").val(); //takes the form of a string YYY-MM-DD
                 
-                // Check the fields available for this date
-                // fieldsAndDates is a map with field id : dates requested
+            //     // var year = parseInt(reqDate.substring(0, 4));
+            //     // var month = parseInt(reqDate.substring(5, 7));
+            //     // var date = parseInt(reqDate.substring(8, 10));
 
-                // 1.) find the fields requested
-                $('#fields').each(function () {
-                    var curElem = $(this);
-                    console.log(curElem.is('input'));
-                });
+            //     //1.) Have PHP run a sql query to request the fields that are available
+            //     window.location.replace('timeCheck.php?reqDate=' + reqDate);
 
-            }
+            //     //2.) Have PHP run a sql query to show the dates available for the fields chosen
+            //     // SQL statement should show all dates in the month that are NOT the dates requested
+            // }
         </script>
         
         <!-- <div class="mb-3">
@@ -303,7 +301,6 @@
         <select class="form-select" id="facility" onchange="updateFields()" >
             
         </select>
-
         </div> -->
         <style>
             label {
@@ -320,7 +317,6 @@
         <br>
 
         <input type='date' id='reqDate'>
-        <button id='date_button' onclick='checkDate()'>Check this date</button>
         <!-- <div id = "monthList">
             <label for="monthlist" class="field-form-label">Month</label>
             <select id="monthlist" name="monthlist" onchange="updateMonth()">
@@ -338,9 +334,6 @@
                 <option value="12"<?php if($month_id==12)echo "Selected"; ?>>December</option>
             </select>
         
-
-
-
             <label for="priority" class="day-form-label">Day</label>
             <select id="day" name="priority" onchange = "updateDays()">
                 <option value="1"<?php if($day_id==1)echo "Selected"; ?>>1</option>
