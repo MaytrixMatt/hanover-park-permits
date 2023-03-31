@@ -5,15 +5,18 @@
         if(!isset($id)){
             $id = 1;
         }
-        if(!isset($month_id)){
-            $month_id = 1;
+        if(!isset($reqDate)) {
+            $reqDate = "2023-01-01"; 
         }
-        if(!isset($day_id)){
-            $day_id = 1;
-        }
-        if(!isset($year_id)){
-            $year_id = 1;
-        }
+        // if(!isset($month_id)){
+        //     $month_id = 1;
+        // }
+        // if(!isset($day_id)){
+        //     $day_id = 1;
+        // }
+        // if(!isset($year_id)){
+        //     $year_id = 1;
+        // }
     ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
@@ -166,6 +169,9 @@
             //      ----This returns a list of requested dates for that field
             // 3.) Generate a string: iterate throug the list to generate a string 
             //      for the boolean condition of the future sql statement
+
+
+            // what fields are available for a given date
         ?>
         <script>
             
@@ -174,7 +180,7 @@
             var onlyFacsID = <?php echo json_encode($onlyFacsID)?>; //holds facility IDs
             var facsID_facsNames = <?php echo json_encode($allFacsAndIDs)?>;
 
-            // var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
+            var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
             // var reqFieldsID = <?php echo json_encode($onlyFieldsID)?>; //holds the ids for the fields ****NYI****
             var fldID_fldNames = <?php echo json_encode($allFldsAndIDs)?>; // key (field_id) : value (field_name)
             // fieldsIDs don't start at 1 nor 0!!!!
@@ -276,18 +282,19 @@
             //     window.location.replace('permitForm.php?id=' + id);
             // }
 
-            function updateTimes(){
-                var reqDate=$("#reqDate").val(); //takes the form of a string YYY-MM-DD
+            function checkDate(){
+                var reqDate=$("#reqDate").val(); //takes the form of a string YYYY-MM-DD
+                console.log(reqDate);
                 
-                // var year = parseInt(reqDate.substring(0, 4));
-                // var month = parseInt(reqDate.substring(5, 7));
-                // var date = parseInt(reqDate.substring(8, 10));
+                // Check the fields available for this date
+                // fieldsAndDates is a map with field id : dates requested
 
-                //1.) Have PHP run a sql query to request the fields that are available
-                window.location.replace('timeCheck.php?reqDate=' + reqDate);
+                // 1.) find the fields requested
+                $('#fields').each(function () {
+                    var curElem = $(this);
+                    console.log(curElem.is('input'));
+                });
 
-                //2.) Have PHP run a sql query to show the dates available for the fields chosen
-                // SQL statement should show all dates in the month that are NOT the dates requested
             }
         </script>
         
@@ -312,7 +319,8 @@
         </div>
         <br>
 
-        <input type='date' id='reqDate' onchange='updateTime()'>
+        <input type='date' id='reqDate'>
+        <button id='date_button' onclick='checkDate()'>Check this date</button>
         <!-- <div id = "monthList">
             <label for="monthlist" class="field-form-label">Month</label>
             <select id="monthlist" name="monthlist" onchange="updateMonth()">
