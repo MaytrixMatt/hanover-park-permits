@@ -181,9 +181,9 @@
             var facsID_facsNames = <?php echo json_encode($allFacsAndIDs)?>;
 
             var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
-            // var reqFieldsID = <?php echo json_encode($onlyFieldsID)?>; //holds the ids for the fields ****NYI****
+            
             var fldID_fldNames = <?php echo json_encode($allFldsAndIDs)?>; // key (field_id) : value (field_name)
-            // fieldsIDs don't start at 1 nor 0!!!!
+            // fieldsIDs don't start at 1 nor 0!`!!!
             // console.log(onlyFieldsID);
 
             
@@ -282,20 +282,20 @@
             //     window.location.replace('permitForm.php?id=' + id);
             // }
 
-            function checkDate(){
-                var reqDate=$("#reqDate").val(); //takes the form of a string YYYY-MM-DD
-                console.log(reqDate);
+            // function checkDate(){
+            //     var reqDate=$("#reqDate").val(); //takes the form of a string YYYY-MM-DD
+            //     console.log(reqDate);
                 
-                // Check the fields available for this date
-                // fieldsAndDates is a map with field id : dates requested
+            //     // Check the fields available for this date
+            //     // fieldsAndDates is a map with field id : dates requested
 
-                // 1.) find the fields requested
-                $('#fields').each(function () {
-                    var curElem = $(this);
-                    console.log(curElem.is('input'));
-                });
+            //     // 1.) find the fields requested
+            //     $('#fields').each(function () {
+            //         var curElem = $(this);
+            //         console.log(curElem.is('input'));
+            //     });
 
-            }
+            // }
         </script>
         
         <!-- <div class="mb-3">

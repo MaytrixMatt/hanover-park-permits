@@ -21,7 +21,7 @@ function get_database_connection()
     $servername = "localhost";
     $username = "root";
     $password = "password";
-    $dbname = "parkpermit";
+    $dbname = "fieldpermits";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error)
