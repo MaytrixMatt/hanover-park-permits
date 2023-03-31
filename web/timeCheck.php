@@ -181,7 +181,7 @@
             var facsID_facsNames = <?php echo json_encode($allFacsAndIDs)?>;
 
             var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
-            // var reqFieldsID = <?php echo json_encode($onlyFieldsID)?>; //holds the ids for the fields ****NYI****
+            
             var fldID_fldNames = <?php echo json_encode($allFldsAndIDs)?>; // key (field_id) : value (field_name)
             // fieldsIDs don't start at 1 nor 0!!!!
             // console.log(onlyFieldsID);
