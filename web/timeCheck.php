@@ -216,7 +216,6 @@
             }
 
            
-
             // This function loads fields as checkboxes
             // -Is run as an onclick function on each facility checkbox
             // 1.) check the value of the facility that ran this function
@@ -253,25 +252,10 @@
                         $('#label_fld_'+ curFieldID).remove();
 
                     }
-
                     
                 }
                 
             }
-
-
-            // function updateMonth(){
-            //     var month_id=$("#year").val();
-            //     window.location.replace('permitForm.php?id=' + id);
-            // }
-            // function updateDays(){
-            //     var day_id=$("#day").val();
-            //     window.location.replace('permitForm.php?id=' + id);
-            // }
-            // function updateYear(){
-            //     var year_id=$("#year").val();
-            //     window.location.replace('permitForm.php?id=' + id);
-            // }
 
             function checkDate(){
                 var reqDate=$("#reqDate").val(); //takes the form of a string YYYY-MM-DD
