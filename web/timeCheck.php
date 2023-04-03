@@ -277,14 +277,17 @@
                     
                     if (checkBox.is(':checked')) {
                         // fieldsReq.push(checkBox);
-                        console.log(fieldsReq);
+                        console.log(fieldsReq + 'check');
                         var curDate = new Date();
                         curDate.setDate(curDate.getDate() - 1);
                         var fldID = checkBox.attr('id');
                         fldID = fldID.substring(fldID.indexOf('_') + 1);
-                        
-                        var badDates = ["2023-04-05"]
-                        for (var i = 0; i <= 10; i++) {
+                        console.log(fieldsAndDates[fldID]);
+                        var badDates = [];
+                        if (fieldsAndDates[fldID] != undefined){
+                            badDates = fieldsAndDates[fldID];
+                        }
+                        for (var i = 0; i <= 30; i++) {
                             curDate.setDate(curDate.getDate() + 1);
                             var strDate = curDate.getUTCFullYear() + "-";
                             if (curDate.getUTCMonth() + 1 < 10) {
@@ -302,7 +305,7 @@
                             if (badDates.indexOf(strDate) == -1) {
                                 console.log(strDate);
                             } else {
-                                console.log("Already scheduled: pick another date");
+                                console.log(strDate  + " Already scheduled: pick another date");
                             }
                         }
                     }
