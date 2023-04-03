@@ -156,12 +156,7 @@
             //      times that the user is allowed to request
 
 
-            echo json_encode($allFacsFields);
-            echo json_encode($onlyFacs);
-            echo json_encode($onlyFacsID);
-            echo json_encode($allFacsAndIDs);
-            echo json_encode($allFieldsDates);
-            echo json_encode($allFldsAndIDs);
+            
             // $sqlAvailableDates = <
 
             // idea for checking all applications where the requested date is NOT
@@ -179,7 +174,7 @@
             var onlyFacsID = <?php echo json_encode($onlyFacsID)?>; //holds facility IDs
             var facsID_facsNames = <?php echo json_encode($allFacsAndIDs)?>;
 
-            // var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
+            var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
             
             var fldID_fldNames = <?php echo json_encode($allFldsAndIDs)?>; // key (field_id) : value (field_name)
             // fieldsIDs don't start at 1 nor 0!!!!
@@ -189,37 +184,37 @@
 
             function loadFacilities() {
                 
-                console.log("hellowhdlksa");
-                // var facCheckBoxes = $('#facility');
-                // for (var i = 0; i < onlyFacs.length; i++) {
-                //     var onclickFunc = 'loadFields(\"' + onlyFacsID[i] + '\");';
-                //     var lbl = $('<label/>', {id: 'label_fac_' + onlyFacsID[i], text: onlyFacs[i]});
-                //     lbl.append(
-                //         $('<input/>', {type: 'checkbox', id: 'fac_' + onlyFacsID[i], value: onlyFacsID[i].toString(), onclick: onclickFunc})
-                //     );
+                // console.log("hellowhdlksa");
+                var facCheckBoxes = $('#facility');
+                for (var i = 0; i < onlyFacs.length; i++) {
+                    var onclickFunc = 'loadFields(\"' + onlyFacsID[i] + '\");';
+                    var lbl = $('<label/>', {id: 'label_fac_' + onlyFacsID[i], text: onlyFacs[i]});
+                    lbl.append(
+                        $('<input/>', {type: 'checkbox', id: 'fac_' + onlyFacsID[i], value: onlyFacsID[i].toString(), onclick: onclickFunc})
+                    );
 
-                //     lbl.appendTo(facCheckBoxes);
-                //     facCheckBoxes.append("<br>");
-                //     // loadFields(onlyFacs[i])
-                //     // $("#fac_" + i).click(loadFields(onlyFacs[i]));
-                //     // facDropDown.append(
-                //     //     $('<option></option>').val(i + 1).html(onlyFacs[i])
-                //     // );
-                // }
+                    lbl.appendTo(facCheckBoxes);
+                    facCheckBoxes.append("<br>");
+                    // loadFields(onlyFacs[i])
+                    // $("#fac_" + i).click(loadFields(onlyFacs[i]));
+                    // facDropDown.append(
+                    //     $('<option></option>').val(i + 1).html(onlyFacs[i])
+                    // );
+                }
 
-                //Drop Down Code
+                // Drop Down Code
                 
                 // facDropDown.val(<?php echo $id ?>);
 
 
-                // var curFlds = facilitiesAndFields[onlyFacs[<?php echo $id?> - 1]];
-                // var fldDropDown = $('#field');
-                // for (var i = 0; i < curFlds.length; i++) {
+                var curFlds = facilitiesAndFields[onlyFacs[<?php echo $id?> - 1]];
+                var fldDropDown = $('#field');
+                for (var i = 0; i < curFlds.length; i++) {
                     
-                //     fldDropDown.append(
-                //         $('<option></option>').val(i + 1).html(curFlds[i])
-                //     );
-                // };
+                    fldDropDown.append(
+                        $('<option></option>').val(i + 1).html(curFlds[i])
+                    );
+                };
                 
             }
 
@@ -229,43 +224,43 @@
             // -Is run as an onclick function on each facility checkbox
             // 1.) check the value of the facility that ran this function
             // 2.) set the visibility to hidden 
-            // function loadFields(facID) {
-            //     // console.log("This facility ID was loaded: " + facID);
+            function loadFields(facID) {
+                // console.log("This facility ID was loaded: " + facID);
                 
-            //     var fieldCheckBoxes = $('#fields');
-            //     var correspFldIDs = facilitiesAndFields[facID];
-            //     var fac = facsID_facsNames[facID];
-            //     var facCheckboxStatus = $('#fac_' + facID).is(':checked'); //was the checkbox checked????
+                var fieldCheckBoxes = $('#fields');
+                var correspFldIDs = facilitiesAndFields[facID];
+                var fac = facsID_facsNames[facID];
+                var facCheckboxStatus = $('#fac_' + facID).is(':checked'); //was the checkbox checked????
                 
-            //     for (var i = 0; i < correspFldIDs.length; i++) {
-            //         var curFieldID = correspFldIDs[i];
+                for (var i = 0; i < correspFldIDs.length; i++) {
+                    var curFieldID = correspFldIDs[i];
                     
-            //         // var onclickFunc = 
+                    // var onclickFunc = 
                     
-            //         if (facCheckboxStatus) {
+                    if (facCheckboxStatus) {
 
-            //             console.log(fldID_fldNames[curFieldID]);
-            //             var fldName = fldID_fldNames[curFieldID];
+                        console.log(fldID_fldNames[curFieldID]);
+                        var fldName = fldID_fldNames[curFieldID];
 
-            //             var onclickFunc = 'checkDateAvail(' + curFieldID + ')';
-            //             var lbl = $('<label/>', {for: 'fld_' + curFieldID, text: fac + ' @ ' + fldName, id: 'label_fld_' + curFieldID});
-            //             lbl.append(
-            //                 $('<input/>', {type: 'checkbox', id: 'fld_' + curFieldID, value: fac + '_' + curFieldID})
-            //             );
-            //             lbl.appendTo(fieldCheckBoxes);
+                        var onclickFunc = 'checkDateAvail(' + curFieldID + ')';
+                        var lbl = $('<label/>', {for: 'fld_' + curFieldID, text: fac + ' @ ' + fldName, id: 'label_fld_' + curFieldID});
+                        lbl.append(
+                            $('<input/>', {type: 'checkbox', id: 'fld_' + curFieldID, value: fac + '_' + curFieldID})
+                        );
+                        lbl.appendTo(fieldCheckBoxes);
                     
-            //         } else if (!facCheckboxStatus) {
+                    } else if (!facCheckboxStatus) {
 
-            //             console.log("Deleting element: Field ID " + curFieldID );
-            //             $('#fld_' + curFieldID).remove();
-            //             $('#label_fld_'+ curFieldID).remove();
+                        console.log("Deleting element: Field ID " + curFieldID );
+                        $('#fld_' + curFieldID).remove();
+                        $('#label_fld_'+ curFieldID).remove();
 
-            //         }
+                    }
 
                     
-            //     }
+                }
                 
-            // }
+            }
 
 
             // function updateMonth(){
