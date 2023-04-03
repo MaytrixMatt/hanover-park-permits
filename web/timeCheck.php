@@ -230,43 +230,43 @@
             // -Is run as an onclick function on each facility checkbox
             // 1.) check the value of the facility that ran this function
             // 2.) set the visibility to hidden 
-            function loadFields(facID) {
-                // console.log("This facility ID was loaded: " + facID);
+            // function loadFields(facID) {
+            //     // console.log("This facility ID was loaded: " + facID);
                 
-                var fieldCheckBoxes = $('#fields');
-                var correspFldIDs = facilitiesAndFields[facID];
-                var fac = facsID_facsNames[facID];
-                var facCheckboxStatus = $('#fac_' + facID).is(':checked'); //was the checkbox checked????
+            //     var fieldCheckBoxes = $('#fields');
+            //     var correspFldIDs = facilitiesAndFields[facID];
+            //     var fac = facsID_facsNames[facID];
+            //     var facCheckboxStatus = $('#fac_' + facID).is(':checked'); //was the checkbox checked????
                 
-                for (var i = 0; i < correspFldIDs.length; i++) {
-                    var curFieldID = correspFldIDs[i];
+            //     for (var i = 0; i < correspFldIDs.length; i++) {
+            //         var curFieldID = correspFldIDs[i];
                     
-                    // var onclickFunc = 
+            //         // var onclickFunc = 
                     
-                    if (facCheckboxStatus) {
+            //         if (facCheckboxStatus) {
 
-                        // console.log(fldID_fldNames[curFieldID]);
-                        var fldName = fldID_fldNames[curFieldID];
+            //             // console.log(fldID_fldNames[curFieldID]);
+            //             var fldName = fldID_fldNames[curFieldID];
 
-                        var onclickFunc = 'checkDateAvail(' + curFieldID + ')';
-                        var lbl = $('<label/>', {for: 'fld_' + curFieldID, text: fac + ' @ ' + fldName, id: 'label_fld_' + curFieldID});
-                        lbl.append(
-                            $('<input/>', {type: 'checkbox', id: 'fld_' + curFieldID, value: fac + '_' + curFieldID})
-                        );
-                        lbl.appendTo(fieldCheckBoxes);
+            //             var onclickFunc = 'checkDateAvail(' + curFieldID + ')';
+            //             var lbl = $('<label/>', {for: 'fld_' + curFieldID, text: fac + ' @ ' + fldName, id: 'label_fld_' + curFieldID});
+            //             lbl.append(
+            //                 $('<input/>', {type: 'checkbox', id: 'fld_' + curFieldID, value: fac + '_' + curFieldID})
+            //             );
+            //             lbl.appendTo(fieldCheckBoxes);
                     
-                    } else if (!facCheckboxStatus) {
+            //         } else if (!facCheckboxStatus) {
 
-                        console.log("Deleting element: Field ID " + curFieldID );
-                        $('#fld_' + curFieldID).remove();
-                        $('#label_fld_'+ curFieldID).remove();
+            //             console.log("Deleting element: Field ID " + curFieldID );
+            //             $('#fld_' + curFieldID).remove();
+            //             $('#label_fld_'+ curFieldID).remove();
 
-                    }
+            //         }
 
                     
-                }
+            //     }
                 
-            }
+            // }
 
 
             // function updateMonth(){
@@ -282,65 +282,65 @@
             //     window.location.replace('permitForm.php?id=' + id);
             // }
 
-            function checkDate(){
-                var reqDate=$("#reqDate").val(); //takes the form of a string YYYY-MM-DD
-                console.log(reqDate);
+            // function checkDate(){
+            //     var reqDate=$("#reqDate").val(); //takes the form of a string YYYY-MM-DD
+            //     console.log(reqDate);
                 
-                // Check the fields available for this date
-                // fieldsAndDates is a map with field id : dates requested
+            //     // Check the fields available for this date
+            //     // fieldsAndDates is a map with field id : dates requested
 
-                // Jacob and Hayden working to display the fields available for a given date
-                // --Possible by looking in the PHP map variable which holds each field that has requested dates
-                // --Check whether any of those requested dates match the current requested date
+            //     // Jacob and Hayden working to display the fields available for a given date
+            //     // --Possible by looking in the PHP map variable which holds each field that has requested dates
+            //     // --Check whether any of those requested dates match the current requested date
                 
-                // 1.) find the fields requested
-                var fieldsReq = [];
-                console.log($('#fields').children());
-                $('#fields').children().each(function () {
-                    var curLabel = $(this);
-                    var checkBox = curLabel.children();
+            //     // 1.) find the fields requested
+            //     var fieldsReq = [];
+            //     console.log($('#fields').children());
+            //     $('#fields').children().each(function () {
+            //         var curLabel = $(this);
+            //         var checkBox = curLabel.children();
                     
-                    if (checkBox.is(':checked')) {
-                        // fieldsReq.push(checkBox);
-                        console.log(fieldsReq);
-                        var curDate = new Date();
-                        curDate.setDate(curDate.getDate() - 1);
-                        var fldID = checkBox.attr('id');
-                        fldID = fldID.substring(fldID.indexOf('_') + 1);
+            //         if (checkBox.is(':checked')) {
+            //             // fieldsReq.push(checkBox);
+            //             console.log(fieldsReq);
+            //             var curDate = new Date();
+            //             curDate.setDate(curDate.getDate() - 1);
+            //             var fldID = checkBox.attr('id');
+            //             fldID = fldID.substring(fldID.indexOf('_') + 1);
                         
-                        var badDates = ["2023-04-05"]
-                        for (var i = 0; i <= 10; i++) {
-                            curDate.setDate(curDate.getDate() + 1);
-                            var strDate = curDate.getUTCFullYear() + "-";
-                            if (curDate.getUTCMonth() + 1 < 10) {
-                                strDate = strDate + "0" + (curDate.getUTCMonth() + 1 ) + "-" ;
-                            } else {
-                                strDate = strDate + (curDate.getUTCMonth() + 1) + "-";
-                            }
+            //             var badDates = ["2023-04-05"]
+            //             for (var i = 0; i <= 10; i++) {
+            //                 curDate.setDate(curDate.getDate() + 1);
+            //                 var strDate = curDate.getUTCFullYear() + "-";
+            //                 if (curDate.getUTCMonth() + 1 < 10) {
+            //                     strDate = strDate + "0" + (curDate.getUTCMonth() + 1 ) + "-" ;
+            //                 } else {
+            //                     strDate = strDate + (curDate.getUTCMonth() + 1) + "-";
+            //                 }
 
-                            if (curDate.getUTCDate()< 10) {
-                                strDate = strDate + "0" + curDate.getUTCDate();
-                            } else {
-                                strDate = strDate + curDate.getUTCDate();
-                            }
+            //                 if (curDate.getUTCDate()< 10) {
+            //                     strDate = strDate + "0" + curDate.getUTCDate();
+            //                 } else {
+            //                     strDate = strDate + curDate.getUTCDate();
+            //                 }
 
-                            if (badDates.indexOf(strDate) == -1) {
-                                console.log(strDate);
-                            } else {
-                                console.log("Already scheduled: pick another date");
-                            }
-                        }
-                    }
+            //                 if (badDates.indexOf(strDate) == -1) {
+            //                     console.log(strDate);
+            //                 } else {
+            //                     console.log("Already scheduled: pick another date");
+            //                 }
+            //             }
+            //         }
 
-                    // make sure to throw error when user requests bad date
-                });
+            //         // make sure to throw eror when user requests bad date
+            //     });
                 
                 
-                // 2.) Display the next 30 days, exclude the ones that aren't available
+            //     // 2.) Display the next 30 days, exclude the ones that aren't available
 
 
 
-            }
+            // }
         </script>
         
         <!-- <div class="mb-3">
