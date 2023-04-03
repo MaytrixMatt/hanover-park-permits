@@ -1,7 +1,5 @@
 <?php
-
 include('library.php');
-
 ?>
 <!DOCTYPE html>
 <html>

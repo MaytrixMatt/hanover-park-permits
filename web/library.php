@@ -23,7 +23,7 @@ function get_database_connection()
     $password = "password";
     $dbname = "parkpermit";
 
-    $conn = new mysqli($servername, $username, $password);
+    $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error)
     {
         die("Connection failed: " . $conn->connect_error);
