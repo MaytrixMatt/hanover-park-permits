@@ -181,7 +181,7 @@
             var facsID_facsNames = <?php echo json_encode($allFacsAndIDs)?>;
 
             var fieldsAndDates = <?php echo json_encode($allFieldsDates)?>; // key (field_id) : value (array of dates)
-            // var reqFieldsID = <?php echo json_encode($onlyFieldsID)?>; //holds the ids for the fields ****NYI****
+            
             var fldID_fldNames = <?php echo json_encode($allFldsAndIDs)?>; // key (field_id) : value (field_name)
             // fieldsIDs don't start at 1 nor 0!!!!
             // console.log(onlyFieldsID);
@@ -245,7 +245,7 @@
                     
                     if (facCheckboxStatus) {
 
-                        console.log(fldID_fldNames[curFieldID]);
+                        // console.log(fldID_fldNames[curFieldID]);
                         var fldName = fldID_fldNames[curFieldID];
 
                         var onclickFunc = 'checkDateAvail(' + curFieldID + ')';
@@ -289,11 +289,56 @@
                 // Check the fields available for this date
                 // fieldsAndDates is a map with field id : dates requested
 
+                // Jacob and Hayden working to display the fields available for a given date
+                // --Possible by looking in the PHP map variable which holds each field that has requested dates
+                // --Check whether any of those requested dates match the current requested date
+                
                 // 1.) find the fields requested
-                $('#fields').each(function () {
-                    var curElem = $(this);
-                    console.log(curElem.is('input'));
+                var fieldsReq = [];
+                console.log($('#fields').children());
+                $('#fields').children().each(function () {
+                    var curLabel = $(this);
+                    var checkBox = curLabel.children();
+                    
+                    if (checkBox.is(':checked')) {
+                        // fieldsReq.push(checkBox);
+                        console.log(fieldsReq);
+                        var curDate = new Date();
+                        curDate.setDate(curDate.getDate() - 1);
+                        var fldID = checkBox.attr('id');
+                        fldID = fldID.substring(fldID.indexOf('_') + 1);
+                        
+                        var badDates = ["2023-04-05"]
+                        for (var i = 0; i <= 10; i++) {
+                            curDate.setDate(curDate.getDate() + 1);
+                            var strDate = curDate.getUTCFullYear() + "-";
+                            if (curDate.getUTCMonth() + 1 < 10) {
+                                strDate = strDate + "0" + (curDate.getUTCMonth() + 1 ) + "-" ;
+                            } else {
+                                strDate = strDate + (curDate.getUTCMonth() + 1) + "-";
+                            }
+
+                            if (curDate.getUTCDate()< 10) {
+                                strDate = strDate + "0" + curDate.getUTCDate();
+                            } else {
+                                strDate = strDate + curDate.getUTCDate();
+                            }
+
+                            if (badDates.indexOf(strDate) == -1) {
+                                console.log(strDate);
+                            } else {
+                                console.log("Already scheduled: pick another date");
+                            }
+                        }
+                    }
+
+                    // make sure to throw error when user requests bad date
                 });
+                
+                
+                // 2.) Display the next 30 days, exclude the ones that aren't available
+
+
 
             }
         </script>
