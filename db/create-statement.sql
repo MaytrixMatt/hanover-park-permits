@@ -1,4 +1,4 @@
-DROP `parkpermit` IF EXISTS
+DROP DATABASE IF EXISTS `parkpermit`;
 CREATE SCHEMA `parkpermit`;
 USE `parkpermit`;
 
