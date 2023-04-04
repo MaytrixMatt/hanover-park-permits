@@ -307,10 +307,8 @@
 
                             if (badDates.indexOf(strDate) == -1) {
                                 console.log(strDate);
-                                $("#rename",strDate);
                             } else {
                                 console.log(strDate  + " Already scheduled: pick another date");
-                                $("#rename",strDate  + " Already scheduled: pick another date");
                             }
                         }
                     }
@@ -368,9 +366,6 @@
 
         <br>
         <br>
-
-        <div id = "rename">
-        </div>
 
     </tbody>
     </table>
