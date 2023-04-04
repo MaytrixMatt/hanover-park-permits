@@ -23,7 +23,7 @@ CREATE TABLE `applications` (
   `app_cus_first_name` varchar(45) DEFAULT NULL,
   `app_cus_last_name` varchar(45) DEFAULT NULL,
   `app_tier` INT NOT NULL,
-  `app_afl_id` varchar(45) DEFAULT NOT NULL,
+  `app_afl_id` varchar(45) NOT NULL,
   `app_date_req` VARCHAR(45) NOT NULL,
   `app_description` VARCHAR(200) NULL,
   `app_estimated_people` INT NOT NULL,
