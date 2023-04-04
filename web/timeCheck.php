@@ -167,6 +167,9 @@
             // 3.) Generate a string: iterate throug the list to generate a string 
             //      for the boolean condition of the future sql statement
         ?>
+        <?php
+            $datecollecter="SELECT * FROM fields LEFT OUTER JOIN application_fields ON afl_fld_id=fld_id LEFT OUTER JOIN applications ON app_afl_id=afl_id AND app_date_req='fieldsAndDates' WHERE app_date_req IS null"
+        ?>
         <script>
             
             var facilitiesAndFields = <?php echo json_encode($allFacsFields)?>; // key : value (map)
@@ -179,7 +182,7 @@
             var fldID_fldNames = <?php echo json_encode($allFldsAndIDs)?>; // key (field_id) : value (field_name)
             // fieldsIDs don't start at 1 nor 0!!!!
             // console.log(onlyFieldsID);
-
+            
             
 
             function loadFacilities() {
@@ -379,7 +382,17 @@
         <br>
         Fields
         <div id="fields">
+            <?php 
+                $result = $conn->query($datecollecter);
 
+                // Iterate over each row in the results
+                while ($row = $result->fetch_assoc())
+                {
+                    echo "<tr>";
+                    echo "<td>" . $row['fld_name'] . "</td>";
+                    echo "</tr>";
+                }
+            ?>
         </div>
 
         <br>
