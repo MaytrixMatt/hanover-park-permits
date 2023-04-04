@@ -1,5 +1,6 @@
-CREATE SCHEMA IF NOT EXISTS `parkpermit`;
--- We could possibly rework this to have a DROP statement and get rid of the if clause, that way the database/schema follows the exact formula of our 'backup'.
+DROP `parkpermit` IF EXISTS
+CREATE SCHEMA `parkpermit`;
+USE `parkpermit`;
 
 CREATE TABLE `fields` (
   `fld_id` int NOT NULL AUTO_INCREMENT,
@@ -10,18 +11,6 @@ CREATE TABLE `fields` (
   UNIQUE KEY `fld_id_UNIQUE` (`fld_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `customers` (
-  `cus_id` INT NOT NULL AUTO_INCREMENT,
-  `cus_first_name` VARCHAR(45) NOT NULL,
-  `cus_last_name` VARCHAR(45) NOT NULL,
-  `cus_organization_name` VARCHAR(100) NOT NULL,
-  `cus_address` VARCHAR(100) NOT NULL,
-  `cus_phone` VARCHAR(45) NOT NULL,
-  `cus_email` VARCHAR(100) NOT NULL,
-  `cus_tier` INT NOT NULL,
-  PRIMARY KEY (`cus_id`),
-  UNIQUE INDEX `cus_id_UNIQUE` (`cus_id` ASC) VISIBLE);
-  
 CREATE TABLE `location` (
   `loc_id` int NOT NULL AUTO_INCREMENT,
   `loc_name` varchar(100) NOT NULL,
@@ -36,10 +25,22 @@ CREATE TABLE `applications` (
   `app_tier` INT NOT NULL,
   `app_afl_id` varchar(45) DEFAULT NOT NULL,
   `app_date_req` VARCHAR(45) NOT NULL,
-  `app_start_time` VARCHAR(45) NOT NULL,
-  `app_end_time` VARCHAR(45) NOT NULL,
   `app_description` VARCHAR(200) NULL,
   `app_estimated_people` INT NOT NULL,
   PRIMARY KEY (`app_id`),
   UNIQUE KEY `app_id_UNIQUE` (`app_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- CREATE TABLE `customers` (
+--   `cus_id` INT NOT NULL AUTO_INCREMENT,
+--   `cus_first_name` VARCHAR(45) NOT NULL,
+--   `cus_last_name` VARCHAR(45) NOT NULL,
+--   `cus_organization_name` VARCHAR(100) NOT NULL,
+--   `cus_address` VARCHAR(100) NOT NULL,
+--   `cus_phone` VARCHAR(45) NOT NULL,
+--   `cus_email` VARCHAR(100) NOT NULL,
+--   `cus_tier` INT NOT NULL,
+--   PRIMARY KEY (`cus_id`),
+--   UNIQUE INDEX `cus_id_UNIQUE` (`cus_id` ASC) VISIBLE);
+  
