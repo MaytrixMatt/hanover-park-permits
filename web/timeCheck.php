@@ -273,6 +273,7 @@
                         if (fieldsAndDates[fldID] != undefined){
                             badDates = fieldsAndDates[fldID];
                         }
+                        
                         for (var i = 0; i <= 30; i++) {
                             curDate.setDate(curDate.getDate() + 1);
                             var strDate = curDate.getUTCFullYear() + "-";
@@ -289,9 +290,12 @@
                             }
 
                             if (badDates.indexOf(strDate) == -1) {
-                                console.log(strDate);
+                                
+                                $("#availability").append($('<p>', {id: 'fld_' + fldID, text: (strDate)}));
+                                
                             } else {
-                                console.log(strDate  + " Already scheduled: pick another date");
+                                $("#availability").append($('<p>', {id: 'fld_' + fldID, text: (strDate + " Already scheduled: pick another date:")}));
+                                
                             }
                         }
                     }
@@ -339,7 +343,8 @@
 
         <br>
         <br>
-
+        <div id="availability">
+        </div>
     </tbody>
     </table>
 </body>
