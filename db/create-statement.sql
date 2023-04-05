@@ -39,7 +39,6 @@ CREATE TABLE `application_fields` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-
 -- CREATE TABLE `customers` (
 --   `cus_id` INT NOT NULL AUTO_INCREMENT,
 --   `cus_first_name` VARCHAR(45) NOT NULL,
