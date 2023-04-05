@@ -369,10 +369,12 @@
                         
                         while ($row = $result->fetch_assoc())
                         {
+                            echo json_encode($row);
                             echo "<tr>";
                             echo "<td>" . $facIDs_facNames[$row['afl_loc_id']] . " @ " . $row['fld_name'] . "</td>";
                             echo "<td>" . "open" . "</td>";
                             echo "</tr>";
+
                         }
                     ?>
                 </div>
