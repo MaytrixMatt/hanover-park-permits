@@ -33,6 +33,9 @@ include('library.php');
         if ($conn->query($sql) == TRUE)
         {
             // header('Location: permitForm.php?content=list'); //will redirect to permitForm page
+            $_SESSION['allFacsStatus'] = null;
+            $_SESSION['allFldsStatus'] = null;
+            // echo json_encode($_SESSION);
             echo "Want to submit more? Try the link below";
         }
         else

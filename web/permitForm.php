@@ -249,6 +249,7 @@
                 var reqDate=$("#reqDate").val();
                 window.location.replace('permitForm.php?reqDate=' + reqDate);
             }
+
         </script>
     <body> 
         <style>
@@ -352,7 +353,7 @@
                 <input type="text" name="estimated_people" value = "0"/><br/>
 
                 <br>
-                <input type="submit"/><br/>
+                <input type="submit" /><br/>
                 <br>
 
             </form>
