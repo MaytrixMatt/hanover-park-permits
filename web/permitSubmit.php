@@ -32,7 +32,8 @@ include('library.php');
 
         if ($conn->query($sql) == TRUE)
         {
-            header('Location: permitForm.php?content=list');
+            // header('Location: permitForm.php?content=list'); //will redirect to permitForm page
+            echo "Want to submit more? Try the link below";
         }
         else
         {
