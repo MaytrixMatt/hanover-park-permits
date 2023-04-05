@@ -209,22 +209,22 @@
                 var id=$("#facility").val();
                 window.location.replace('permitForm.php?id=' + id); //reloads the page; php code executes again
             }
-            function updateMonth(){
-                var month_id=$("#year").val();
-                window.location.replace('permitForm.php?id=' + id);
-            }
-            function updateDays(){
-                var day_id=$("#day").val();
-                window.location.replace('permitForm.php?id=' + id);
-            }
-            function updateYear(){
-                var year_id=$("#year").val();
-                window.location.replace('permitForm.php?id=' + id);
-            }
-            function updateFields(){
-                var field_id=$("#field").val();
-                window.location.replace('permitForm.php?id=' + id); //reloads the page; php code executes again
-            }
+            // function updateMonth(){
+            //     var month_id=$("#year").val();
+            //     window.location.replace('permitForm.php?id=' + id);
+            // }
+            // function updateDays(){
+            //     var day_id=$("#day").val();
+            //     window.location.replace('permitForm.php?id=' + id);
+            // }
+            // function updateYear(){
+            //     var year_id=$("#year").val();
+            //     window.location.replace('permitForm.php?id=' + id);
+            // }
+            // function updateFields(){
+            //     var field_id=$("#field").val();
+            //     window.location.replace('permitForm.php?id=' + id); //reloads the page; php code executes again
+            // }
         </script>
         
         <div id ="facility">
