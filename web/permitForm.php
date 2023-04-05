@@ -374,6 +374,7 @@
                             echo "<td>" . $facIDs_facNames[$row['afl_loc_id']] . " @ " . $row['fld_name'] . "</td>";
                             echo "<td>" . "open" . "</td>";
                             echo "</tr>";
+
                         }
                     ?>
                 </div>
