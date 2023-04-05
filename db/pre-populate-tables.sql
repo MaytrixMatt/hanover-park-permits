@@ -1,4 +1,4 @@
--- FACILITY TABLE
+-- LOCATION TABLE
 insert into location(loc_name) value('Briggs Field');
 insert into location(loc_name) value('Ceurvels Field');
 insert into location(loc_name) value('Calvin J. Ellis Field');
