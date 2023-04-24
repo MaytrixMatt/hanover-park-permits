@@ -20,7 +20,7 @@ function get_database_connection()
 {
     $servername = "localhost";
     $username = "root";
-    $password = "password";
+    $password = "390-9076";
     $dbname = "parkpermit";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
